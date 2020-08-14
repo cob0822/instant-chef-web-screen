@@ -1,0 +1,9 @@
+@import './scss/color.scss';
+@import './scss/font-size.scss';
+
+.container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px;
+}

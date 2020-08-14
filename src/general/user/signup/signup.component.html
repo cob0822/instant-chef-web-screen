@@ -1,0 +1,52 @@
+<div class='container'>
+    <form class='formGroup' [formGroup]='inputData' (ngSubmit)='onSubmit()'>
+        <mat-form-field class='formGroup__name-form' appearance="outline" color='warn'> 
+            <mat-label>ユーザー名</mat-label>
+            <input matInput formControlName='name'>
+            <mat-hint>４文字以上、12文字以下の任意の文字</mat-hint>
+            <mat-error *ngIf='name.invalid'>{{nameErrorMessage}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class='formGroup__password-form' appearance="outline" color='warn'>
+            <mat-label>携帯電話番号</mat-label>
+            <input matInput formControlName='phoneNumber' placeholder="01234567890">
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-hint>ハイフンを入力しないで、11文字以上の数字</mat-hint>
+            <mat-error *ngIf='phoneNumber.invalid'>
+                <div class='formGroup__error' *ngFor='let errorMesssage of phoneNumberErrorMessages'>{{errorMesssage}}</div>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class='formGroup__password-form' appearance="outline" color='warn'>
+            <mat-label>メールアドレス</mat-label>
+            <input matInput formControlName='email' placeholder="****@example.com">
+            <mat-error *ngIf='email.invalid'>{{emailErrorMessage}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class='formGroup__password-form' appearance="outline" color='warn'>
+            <mat-label>パスワード</mat-label>
+            <input matInput formControlName='password' [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-hint>６文字以上、12文字以下の英数字（※ 特殊記号の入力は不可）</mat-hint>
+            <mat-error *ngIf='password.invalid'>
+                <div class='formGroup__error' *ngFor='let errorMesssage of passwordErrorMessages'>{{errorMesssage}}</div>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class='formGroup__password-form' appearance="outline" color='warn'>
+            <mat-label>パスワード確認</mat-label>
+            <input matInput formControlName='passwordConfirm' [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="passwordConfirm.invalid">{{passwordConfirmErrorMessage}}</mat-error>
+        </mat-form-field>
+    
+        <div class='formGroup__button'>
+            <button class='formGroup__button--cancel' mat-raised-button [routerLink]="'/'">キャンセル</button>
+            <button class='formGroup__button--submit' mat-raised-button type="submit" [disabled]='inputData.invalid'>無料登録する</button>
+        </div>
+    </form>
+</div>

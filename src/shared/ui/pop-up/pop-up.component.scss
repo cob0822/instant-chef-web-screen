@@ -1,0 +1,9 @@
+@import '../../../scss/color.scss';
+
+.container {
+    background-color: white;
+    width: calc(100% - 20px);
+    padding: 10px;
+    position: absolute;
+    border-radius: 5px;
+}

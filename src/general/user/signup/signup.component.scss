@@ -1,0 +1,45 @@
+@import '../../../scss/color.scss';
+@import '../../../scss/font-size.scss';
+
+.container {
+    padding: 50px 200px;
+}
+
+.title {
+    text-align: center;
+    font-weight: normal;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+
+    mat-form-field {
+        margin-top: 30px;
+    }
+    
+    &__button {
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-evenly;
+
+        button {
+            height: 50px;
+            width: 180px;
+            color: white;
+            font-size: $medium;
+        }
+
+        &--submit {
+            background-color: $orange;
+        }
+
+        &--cancel {
+            background-color: $red;
+        }
+    }
+
+    &__error:not(:first-child) {
+        margin-top: 8px;
+    }
+}
