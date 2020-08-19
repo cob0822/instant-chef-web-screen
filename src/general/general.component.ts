@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchType } from '../shared/enum/search-type';
 import { PageType } from '../shared/enum/page-type';

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +7,7 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(readonly location: Location) { }
+  constructor() { }
 
   public test: string;
   public hide: boolean = true;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { User } from '../../../shared/model/user';
+import { UserService } from '../../../shared/api/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,7 +10,8 @@ import { User } from '../../../shared/model/user';
 })
 export class SignupComponent implements OnInit {
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder,
+              private user: UserService) { }
 
   public hide: boolean = true;
   public inputData: FormGroup;
@@ -26,7 +28,7 @@ export class SignupComponent implements OnInit {
   }
 
   get phoneNumber(): FormControl {
-    return <FormControl>this.inputData.get('phoneNumber');
+    return <FormControl>this.inputData.get('phone_number');
   }
 
   get phoneNumberErrorMessages(): string[] {
@@ -60,7 +62,7 @@ export class SignupComponent implements OnInit {
     return errorMessages;
   }
 
-  get passwordConfirm() {
+  get passwordConfirm(): FormControl {
     return <FormControl>this.inputData.get('passwordConfirm');
   }
 
@@ -73,30 +75,30 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.inputData = this.formBuilder.group({
       name: new FormControl('', [ Validators.required, Validators.minLength(4), Validators.maxLength(12) ]),
-      phoneNumber: new FormControl('', [ Validators.required, Validators.minLength(11), Validators.pattern(new RegExp('^[0-9]*$')) ]),
+      phone_number: new FormControl('', [ Validators.minLength(11), Validators.pattern(new RegExp('^[0-9]*$')) ]),
       email: new FormControl('', [ Validators.required, Validators.email ]),
       password: new FormControl('', [ Validators.required, Validators.minLength(6), Validators.maxLength(12), Validators.pattern(new RegExp('^[0-9a-zA-Z]*$')) ]),
       passwordConfirm: new FormControl('', [ Validators.required, ]),
     }, { validator: this.checkPasswords });
   }
 
-  public onSubmit() {
-    let request: User = {
-      isLogined: false,
+  public onSubmit(): void {
+    let userInput: User = {
       name: '',
       email: '',
-      phoneNumber: 0,
-      password: ''
+      phone_number: undefined,
+      password: '',
+      passwordConfirm: ''
     }
+    
+    Object.assign(userInput, this.inputData.value);
 
-    request.name = this.name.value;
-    request.email = this.email.value;
-    request.phoneNumber = this.phoneNumber.value;
-    request.password = this.password.value;
-    console.log( request);
+    this.user.signup(userInput).subscribe(response => {
+      console.log(response);
+    });
   }
 
-  private checkPasswords(group: FormGroup) { 
+  private checkPasswords(group: FormGroup): void { 
     let password = group.controls.password.value;
     let passwordConfirm = group.controls.passwordConfirm.value;
 

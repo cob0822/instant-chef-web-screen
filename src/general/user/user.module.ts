@@ -10,6 +10,8 @@ import { UserRoutingModule } from './user-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
+import { UserService } from '../../shared/api/user.service';
+
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
@@ -22,6 +24,9 @@ import { SignupComponent } from './signup/signup.component';
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule 
+  ],
+  providers: [
+    UserService
   ]
 })
 export class UserModule { }

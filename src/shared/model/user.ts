@@ -1,7 +1,7 @@
 export interface User {
-    isLogined: boolean;
     name: string;
     email: string;
-    phoneNumber: number;
+    phone_number?: number;
     password: string;
+    passwordConfirm: string;
 }

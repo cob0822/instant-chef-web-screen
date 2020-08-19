@@ -30,6 +30,6 @@ import { RecipeComponent } from './recipe/recipe.component';
     MatSelectModule,
     FormsModule,
     MatFormFieldModule
-  ]
+  ],
 })
 export class GeneralModule { }
