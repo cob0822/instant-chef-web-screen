@@ -9,9 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserRoutingModule } from './user-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-
-import { UserService } from '../../shared/api/user.service';
-
+import { AccountService } from '../../shared/api/account.service';
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
@@ -26,7 +24,7 @@ import { UserService } from '../../shared/api/user.service';
     MatButtonModule 
   ],
   providers: [
-    UserService
+    AccountService
   ]
 })
 export class UserModule { }

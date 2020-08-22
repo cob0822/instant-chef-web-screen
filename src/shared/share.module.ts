@@ -4,7 +4,6 @@ import { UiModule } from './ui/ui.module';
 import { DirectiveModule } from './directive/directive.module';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
   declarations: [],
   imports: [
@@ -17,6 +16,6 @@ import { HttpClientModule } from '@angular/common/http';
     UiModule,
     DirectiveModule,
     HttpClientModule
-  ]
+  ],
 })
 export class ShareModule { }
