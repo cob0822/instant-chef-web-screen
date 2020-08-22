@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { User } from '../../../shared/model/user';
-import { UserService } from '../../../shared/api/user.service';
+import { AccountService } from '../../../shared/api/account.service';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +10,19 @@ import { UserService } from '../../../shared/api/user.service';
 })
 export class LoginComponent implements OnInit {
 
+  get name(): FormControl {
+    return <FormControl>this.inputData.get('name');
+  }
+
+  get password(): FormControl {
+    return <FormControl>this.inputData.get('password');
+  }
+
   constructor(public formBuilder: FormBuilder,
-              private user: UserService) { }
+              private account: AccountService) { }
 
   public inputData: FormGroup;
-  public hide: boolean = true;
+  public isHidden: boolean = true;
 
   ngOnInit(): void {
     this.inputData = this.formBuilder.group({
@@ -24,6 +32,16 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit(): void {
-  }
 
+    let userInput: User = {
+      name: '',
+      password: '',
+    }
+    
+    Object.assign(userInput, this.inputData.value);
+
+    this.account.login(userInput).subscribe((response: User) => {
+      console.log(response);
+    });
+  }
 }

@@ -7,9 +7,9 @@
 
         <mat-form-field class='formGroup__password-form' appearance="outline" color='warn'>
             <mat-label>パスワード</mat-label>
-            <input matInput formControlName='password' [type]="hide ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <input matInput formControlName='password' [type]="isHidden ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="isHidden = !isHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isHidden">
+                <mat-icon>{{isHidden ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
         </mat-form-field>
         <div class='formGroup__button'>
