@@ -9,20 +9,25 @@ export class PopUpTriggerDirective {
   constructor() { }
 
   @Input('target') target: PopUpComponent;
+  @Input('enterable') isEnterable: false;
+  @Input('leavable') isLeavable: false;
+  @Input('clickable') isClickable: false;
+  @Input('all-allow') isAllowed: false;
+
 
   @HostListener('mouseenter')
   onMouseenter() {
-    this.target.popUpStyle = {'display' : 'block'};
+    if(this.isEnterable || this.isAllowed) this.target.popUpStyle = {'display' : 'block'};
   }
 
   @HostListener('mouseleave')
   onMouseleave() {
-    this.target.popUpStyle = {'display' : 'none'};
+    if(this.isLeavable || this.isAllowed) this.target.popUpStyle = {'display' : 'none'};
   }
 
   @HostListener('click')
   onMouseClick() {
-    this.target.popUpStyle = {'display' : 'none'};
+    if(this.isClickable || this.isAllowed) this.target.popUpStyle = {'display' : 'none'};
   }
 
 }

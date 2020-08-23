@@ -36,12 +36,12 @@
                     </button>
                 </span>
                 <span class='menu-bar__menu-button'>
-                    <button [class.active]='isActive(PageTypeEnum.Recipe)' mat-raised-button dirPopUpTrigger [target]='recipeMenuPopup' [routerLink]="'/recipes'">
+                    <button [class.active]='isActive(PageTypeEnum.Recipe)' mat-raised-button dirPopUpTrigger [target]='recipeMenuPopup' [all-allow]='true' [routerLink]="'/recipes/menu'">
                         <mat-icon>restaurant</mat-icon><span>レシピ関連</span>
                     </button>
                     <ui-pop-up #recipeMenuPopup>
                         <ui-list class='list'>
-                            <button mat-raised-button><mat-icon>pan_tool</mat-icon><span>レシピ注文</span></button>
+                            <button mat-raised-button [class.active]='isActive(PageTypeEnum.Order)' [routerLink]="'/recipes/order'"><mat-icon>pan_tool</mat-icon><span>レシピ注文</span></button>
                             <button mat-raised-button><mat-icon>how_to_vote</mat-icon><span>レシピ提供</span></button>
                             <button mat-raised-button><mat-icon>create</mat-icon><span>レシピ作成</span></button>
                             <button mat-raised-button><mat-icon>menu_book</mat-icon><span>レシピ一覧</span></button>
@@ -56,7 +56,7 @@
                     </div>
                 </span>
                 <span class='menu-bar__menu-button'>
-                    <button mat-raised-button dirPopUpTrigger [target]='mypageMenuPopup'>
+                    <button mat-raised-button dirPopUpTrigger [target]='mypageMenuPopup' [all-allow]='true' [target]='mypageMenuPopup'>
                         <mat-icon>face</mat-icon><span>マイページ</span>
                     </button>
                     <ui-pop-up #mypageMenuPopup>

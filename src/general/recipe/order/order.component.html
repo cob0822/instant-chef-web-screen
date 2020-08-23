@@ -1,0 +1,27 @@
+<div class='container'>
+    <mat-horizontal-stepper>
+        <mat-step>
+            <ng-template matStepLabel>ステップ１</ng-template>
+            <span>content 1</span>
+            <div>
+                <button mat-raised-button matStepperNext>次のステップ</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>ステップ2</ng-template>
+            <span>content ２</span>
+            <div>
+                <button mat-raised-button matStepperPrevious>前のステップ</button>
+                <button mat-raised-button matStepperNext>次のステップ</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>ステップ３</ng-template>
+            <span>content ３</span>
+            <div>
+                <button mat-raised-button matStepperPrevious>前のステップ</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+
+</div>

@@ -179,6 +179,10 @@ li {
             button:not(:first-child) {
                 margin-top: 10px;
             }
+
+            .active {
+                background-color: $deep-brown;
+            }
         }
     }
 }

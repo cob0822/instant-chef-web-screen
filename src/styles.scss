@@ -3,3 +3,27 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $background;}
+
+
+//Mat Pallete Setting
+@import '~@angular/material/theming';
+@include mat-core();
+
+$mat-custom: (
+    50: #ffa500,
+    100: #ff4500,
+    150: #ff0000,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        150 : #000000
+    )
+);
+
+$my-app-primary: mat-palette($mat-custom, 50);
+$my-app-accent:  mat-palette($mat-custom, 100);
+$my-app-warn:    mat-palette($mat-custom, 150);
+
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+@include angular-material-theme($my-app-theme);

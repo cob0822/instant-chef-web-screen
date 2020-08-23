@@ -11,10 +11,10 @@ export class AccountService {
   constructor(protected http: HttpClient) { }
 
   public signup(userInput: User): Observable<User> {
-    return this.http.post<User>('/signup', {userInput});
+    return this.http.post<User>('/api/signup', {userInput});
   }
 
   public login(userInput: User): Observable<User> {
-    return this.http.post<User>('/login', {userInput});
+    return this.http.post<User>('/api/login', {userInput});
   }
 }

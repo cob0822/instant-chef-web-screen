@@ -23,10 +23,19 @@ export class PopUpComponent implements OnInit {
     this.popUpStyle = {'display' : 'none'};
   }
 
+  @HostListener('click')
+  onMouseClick() {
+    this.popUpStyle = {'display' : 'none'};
+  }
+
   ngOnInit(): void {
     this.popUpStyle = {
       'display' : 'none'
     };
+  }
+
+  public close() {
+    this.popUpStyle = {'display' : 'none'};
   }
 
 }
