@@ -1,27 +1,59 @@
 <div class='container'>
-    <mat-horizontal-stepper>
-        <mat-step>
-            <ng-template matStepLabel>ステップ１</ng-template>
-            <span>content 1</span>
-            <div>
-                <button mat-raised-button matStepperNext>次のステップ</button>
-            </div>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>ステップ2</ng-template>
-            <span>content ２</span>
-            <div>
-                <button mat-raised-button matStepperPrevious>前のステップ</button>
-                <button mat-raised-button matStepperNext>次のステップ</button>
-            </div>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>ステップ３</ng-template>
-            <span>content ３</span>
-            <div>
-                <button mat-raised-button matStepperPrevious>前のステップ</button>
-            </div>
-        </mat-step>
-    </mat-horizontal-stepper>
+    <header class='header'>
+        <h1 class='header__title mat-elevation-z2'>
+            <mat-icon>pan_tool</mat-icon>
+            レシピ注文
+        </h1>
+        <button mat-raised-button>
+            <mat-icon>save_alt</mat-icon>
+            <span>一時保存</span>
+        </button>
+    </header>
+    <main class='main'>
+        <mat-horizontal-stepper>
+            <mat-step class='required-info'>
+                <ng-template matStepLabel>必須情報</ng-template>
+                <span>content 1</span>
+                <div class='required-info__buttons'>
+                    <button class='nextButton' mat-raised-button matStepperNext>
+                        <span>任意情報へ進む</span><mat-icon>arrow_forward</mat-icon>
+                    </button>
+                </div>
+            </mat-step>
+            <mat-step class='optional-info'>
+                <ng-template matStepLabel>任意情報</ng-template>
+                <span>content ２</span>
+                <div class='optional-info__buttons'>
+                    <button class='previousButton' mat-flat-button matStepperPrevious>
+                        <mat-icon>keyboard_return</mat-icon><span>基本情報へ戻る</span>
+                    </button>
+                    <button class='nextButton' mat-raised-button matStepperNext>
+                        <span>レインアウトへ進む</span><mat-icon>arrow_forward</mat-icon>
+                    </button>
+                </div>
+            </mat-step>
+            <mat-step class='layout-confirmation'>
+                <ng-template matStepLabel>レインアウト</ng-template>
+                <span>content ３</span>
+                <div class='layout-confirmation__buttons'>
+                    <button class='previousButton' mat-flat-button matStepperPrevious>
+                        <mat-icon>keyboard_return</mat-icon><span>任意情報へ戻る</span>
+                    </button>
+                    <button class='nextButton' mat-raised-button matStepperNext>
+                        <span>確認画面へ進む</span><mat-icon>arrow_forward</mat-icon>
+                    </button>
+                </div>
+            </mat-step>
+            <mat-step class='confirmation'>
+                <ng-template matStepLabel>確認画面</ng-template>
+                <span>content ３</span>
+                <div class='confirmation__buttons'>
+                    <button class='previousButton' mat-flat-button matStepperPrevious>
+                        <mat-icon>keyboard_return</mat-icon><span>レインアウトへ戻る</span>
+                    </button>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
 
+    </main>
 </div>

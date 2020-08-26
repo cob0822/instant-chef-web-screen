@@ -4,6 +4,7 @@ import { ShareModule } from '../../shared/share.module';
 import { IndexComponent } from './index/index.component';
 import { OrderComponent } from './order/order.component';
 import { RecipeRoutingModule } from './recipe-routing.module';
+import { PageService } from '../../shared/service/page.service';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,9 @@ import { RecipeRoutingModule } from './recipe-routing.module';
     RecipeRoutingModule,
     CommonModule,
     ShareModule
+  ],
+  providers: [
+    PageService
   ]
 })
 export class RecipeModule { }
