@@ -7,6 +7,7 @@ import { IndexComponent } from './index/index.component';
 
 import { UserComponent } from './user/user.component';
 import { RecipeComponent } from './recipe/recipe.component';
+import { PageService } from '../shared/service/page.service';
  
 @NgModule({
   declarations: [
@@ -19,6 +20,9 @@ import { RecipeComponent } from './recipe/recipe.component';
     CommonModule,
     ShareModule,
     GeneralRoutingModule,
+  ],
+  providers: [
+    PageService
   ],
   exports: [
     ShareModule,

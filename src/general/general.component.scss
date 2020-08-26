@@ -58,10 +58,14 @@ li {
 
         button {
             height: 50px;
-            width: 140px;
+            width: 160px;
             background-color: $brown;
             color: white;
             font-size: $medium;
+        }
+
+        mat-icon {
+            margin-right: 10px;
         }
 
         &--log-in {
@@ -76,7 +80,7 @@ li {
 
 .search {
     display: flex;
-    margin-top: 100px;
+    margin: 50px 0 50px;
 
     &__selector {
         width: 15%;
@@ -140,7 +144,12 @@ li {
 .menu-bar {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 80px;
+    background-color: $background;
+    position: sticky;
+    padding: 20px 0;
+    top: 0;
+    left: 0;
+    z-index: 10;
 
     &__menu-button {
         width: 19.5%;
@@ -184,16 +193,6 @@ li {
                 background-color: $deep-brown;
             }
         }
-    }
-}
-
-.image-box {
-    margin: 20px 0;
-
-    &__image {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
     }
 }
 

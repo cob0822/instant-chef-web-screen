@@ -20,3 +20,13 @@
     background-color: $deep-orange;
     color: white;
 }
+
+.image-box {
+    margin-bottom: 20px;
+
+    &__image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+}

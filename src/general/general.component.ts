@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearchType } from '../shared/enum/search-type';
 import { PageType } from '../shared/enum/page-type';
+import { PageService } from '../shared/service/page.service';
 
 @Component({
   selector: 'app-general',
@@ -14,7 +15,8 @@ export class GeneralComponent implements OnInit {
   SearchTypeEnum = SearchType;
   PageTypeEnum = PageType;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              readonly page: PageService) { }
 
   get url(): string {
     if(this.router.url == '/') return '/top/';
@@ -26,9 +28,5 @@ export class GeneralComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  public isActive(type: string): boolean {
-    return !!this.url.match(new RegExp(`.*${type}.*`));
   }
 }

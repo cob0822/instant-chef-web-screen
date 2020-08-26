@@ -9,12 +9,12 @@
                 </div>
             </a>
             <div class='head-line__right'>
-                <button [class.active]='isActive(PageTypeEnum.Signup)' [routerLink]="'/users/signup'" mat-raised-button>無料登録</button>
-                <button class='head-line__right--log-in' [class.active]='isActive(PageTypeEnum.Login)' [routerLink]="'/users/login'" mat-raised-button>ログイン</button>
+                <button [class.active]='page.isActive(PageTypeEnum.Signup, url)' [routerLink]="'/users/signup'" mat-raised-button><mat-icon>perm_identity</mat-icon><span>無料登録</span></button>
+                <button class='head-line__right--log-in' [class.active]='page.isActive(PageTypeEnum.Login, url)' [routerLink]="'/users/login'" mat-raised-button><mat-icon>login</mat-icon><span>ログイン</span></button>
             </div>
         </section>
 
-        <ng-container *ngIf='!isActive(PageTypeEnum.User)'>
+        <ng-container *ngIf='!page.isActive(PageTypeEnum.User, url)'>
             <section class='search'>
                 <mat-select class='search__selector' [(ngModel)]='searchType'>
                     <mat-option [value]='SearchTypeEnum.RecipesList'>レシピ一覧より</mat-option>
@@ -28,63 +28,59 @@
                     <button class='search__keyword-form--submit' type='submit' mat-raised-button>検索</button>
                 </form>
             </section>
-
-            <section class='menu-bar'>
-                <span class='menu-bar__menu-button'>
-                    <button [class.active]='isActive(PageTypeEnum.Top)' [routerLink]="'/'" mat-raised-button>
-                        <mat-icon>home</mat-icon><span>ホーム</span>
-                    </button>
-                </span>
-                <span class='menu-bar__menu-button'>
-                    <button [class.active]='isActive(PageTypeEnum.Recipe)' mat-raised-button dirPopUpTrigger [target]='recipeMenuPopup' [all-allow]='true' [routerLink]="'/recipes/menu'">
-                        <mat-icon>restaurant</mat-icon><span>レシピ関連</span>
-                    </button>
-                    <ui-pop-up #recipeMenuPopup>
-                        <ui-list class='list'>
-                            <button mat-raised-button [class.active]='isActive(PageTypeEnum.Order)' [routerLink]="'/recipes/order'"><mat-icon>pan_tool</mat-icon><span>レシピ注文</span></button>
-                            <button mat-raised-button><mat-icon>how_to_vote</mat-icon><span>レシピ提供</span></button>
-                            <button mat-raised-button><mat-icon>create</mat-icon><span>レシピ作成</span></button>
-                            <button mat-raised-button><mat-icon>menu_book</mat-icon><span>レシピ一覧</span></button>
-                            <button mat-raised-button><mat-icon>grade</mat-icon><span>ランキング</span></button>
-                        </ui-list>
-                    </ui-pop-up>
-                </span>
-                <span class='menu-bar__menu-button'>
-                    <button mat-raised-button><mat-icon>local_library</mat-icon>料理情報</button>
-                    <div class='menu-popup mat-elevation-z5'>
-
-                    </div>
-                </span>
-                <span class='menu-bar__menu-button'>
-                    <button mat-raised-button dirPopUpTrigger [target]='mypageMenuPopup' [all-allow]='true' [target]='mypageMenuPopup'>
-                        <mat-icon>face</mat-icon><span>マイページ</span>
-                    </button>
-                    <ui-pop-up #mypageMenuPopup>
-                        <ui-list class='list'>
-                            <button mat-raised-button><mat-icon>history</mat-icon><span>&ensp;注文履歴&ensp;</span></button>
-                            <button mat-raised-button><mat-icon>watch_later</mat-icon><span>&ensp;提供履歴&ensp;</span></button>
-                            <button mat-raised-button><mat-icon>favorite</mat-icon><span>お気に入り</span></button>
-                            <button mat-raised-button><mat-icon>attach_file</mat-icon>&ensp;クリップ&ensp;</button>
-                            <button mat-raised-button><mat-icon>local_post_office</mat-icon><span>&ensp;お知らせ&ensp;</span></button>
-                        </ui-list>
-                    </ui-pop-up>
-                </span>
-                <span class='menu-bar__menu-button'>
-                    <button mat-raised-button><mat-icon>contact_support</mat-icon>お問合せ</button>
-                </span>
-            </section>
-
-            <section class='image-box'>
-                <img class='image-box__image' [src]='imagePath'>
-            </section>
         </ng-container>
     </header>
 
-    <main>
+    <nav class='menu-bar' *ngIf='!page.isActive(PageTypeEnum.User, url)'>
+        <span class='menu-bar__menu-button'>
+            <button [class.active]='page.isActive(PageTypeEnum.Top, url)' [routerLink]="'/'" mat-raised-button>
+                <mat-icon>home</mat-icon><span>ホーム</span>
+            </button>
+        </span>
+        <span class='menu-bar__menu-button'>
+            <button [class.active]='page.isActive(PageTypeEnum.Recipe, url)' mat-raised-button dirPopUpTrigger [target]='recipeMenuPopup' [all-allow]='true' [routerLink]="'/recipes/menu'">
+                <mat-icon>restaurant</mat-icon><span>レシピ関連</span>
+            </button>
+            <ui-pop-up #recipeMenuPopup>
+                <ui-list class='list'>
+                    <button mat-raised-button [class.active]='page.isActive(PageTypeEnum.Order, url)' [routerLink]="'/recipes/order'"><mat-icon>pan_tool</mat-icon><span>レシピ注文</span></button>
+                    <button mat-raised-button><mat-icon>how_to_vote</mat-icon><span>レシピ提供</span></button>
+                    <button mat-raised-button><mat-icon>kitchen</mat-icon><span>レシピ作成</span></button>
+                    <button mat-raised-button><mat-icon>menu_book</mat-icon><span>レシピ一覧</span></button>
+                    <button mat-raised-button><mat-icon>grade</mat-icon><span>ランキング</span></button>
+                </ui-list>
+            </ui-pop-up>
+        </span>
+        <span class='menu-bar__menu-button'>
+            <button mat-raised-button><mat-icon>local_library</mat-icon>料理情報</button>
+            <div class='menu-popup mat-elevation-z5'>
+
+            </div>
+        </span>
+        <span class='menu-bar__menu-button'>
+            <button mat-raised-button dirPopUpTrigger [target]='mypageMenuPopup' [all-allow]='true' [target]='mypageMenuPopup'>
+                <mat-icon>face</mat-icon><span>マイページ</span>
+            </button>
+            <ui-pop-up #mypageMenuPopup>
+                <ui-list class='list'>
+                    <button mat-raised-button><mat-icon>history</mat-icon><span>&ensp;注文履歴&ensp;</span></button>
+                    <button mat-raised-button><mat-icon>watch_later</mat-icon><span>&ensp;提供履歴&ensp;</span></button>
+                    <button mat-raised-button><mat-icon>favorite</mat-icon><span>お気に入り</span></button>
+                    <button mat-raised-button><mat-icon>attach_file</mat-icon>&ensp;クリップ&ensp;</button>
+                    <button mat-raised-button><mat-icon>local_post_office</mat-icon><span>&ensp;お知らせ&ensp;</span></button>
+                </ui-list>
+            </ui-pop-up>
+        </span>
+        <span class='menu-bar__menu-button'>
+            <button mat-raised-button><mat-icon>contact_support</mat-icon>お問合せ</button>
+        </span>
+    </nav>
+
+    <main class='main'>
         <router-outlet></router-outlet>
     </main>
 
-    <footer class='footer' *ngIf='!isActive(PageTypeEnum.User)'>
+    <footer class='footer' *ngIf='!page.isActive(PageTypeEnum.User, url)'>
         <ul class='footer__list'>
             <li ><a [routerLink]="'/'">ホーム</a></li>
         </ul>

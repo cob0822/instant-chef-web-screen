@@ -1,8 +1,9 @@
 export enum PageType {
     Top = 'top',
-    User = 'user',
+    User = 'users',
     Login = 'login',
     Signup = 'signup',
-    Recipe = 'recipe',
-    Order = 'order'
+    Recipe = 'recipes',
+    Order = 'order',
+    RecipeMenu = 'recipes/menu'
 }

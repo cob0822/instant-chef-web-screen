@@ -31,17 +31,26 @@
 
         button {
             height: 50px;
-            width: 180px;
-            color: white;
+            width: 200px;
             font-size: $medium;
         }
 
         &--submit {
             background-color: $orange;
+            color: white;
+
+            mat-icon {
+                margin-right: 10px;
+            }
         }
 
         &--cancel {
-            background-color: $red;
+            border: 1px solid $gray;
+            color: $gray;
+
+            mat-icon {
+                margin-right: 10px;
+            }
         }
     }
 
