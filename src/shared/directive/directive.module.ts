@@ -2,16 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PopUpTriggerDirective }  from './pop-up-trigger/pop-up-trigger.directive';
 
-
 @NgModule({
   declarations: [
-    PopUpTriggerDirective
+    PopUpTriggerDirective,
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    PopUpTriggerDirective
+    PopUpTriggerDirective,
   ]
 })
 export class DirectiveModule { }

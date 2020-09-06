@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DialogModule } from './dialog/dialog.module';
 import { UiModule } from './ui/ui.module';
 import { DirectiveModule } from './directive/directive.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,6 +11,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [],
@@ -25,7 +30,12 @@ import { MatStepperModule } from '@angular/material/stepper';
     FormsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatStepperModule
+    MatStepperModule,
+    DialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTooltipModule,
+    MatDividerModule
   ],
   exports: [
     UiModule,
@@ -38,7 +48,12 @@ import { MatStepperModule } from '@angular/material/stepper';
     FormsModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatStepperModule
+    MatStepperModule,
+    DialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTooltipModule,
+    MatDividerModule
   ],
 })
 export class ShareModule { }

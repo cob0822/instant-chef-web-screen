@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Input, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'ui-pop-up',
@@ -6,6 +6,9 @@ import { Component, OnInit, HostListener } from '@angular/core';
   styleUrls: ['./pop-up.component.scss']
 })
 export class PopUpComponent implements OnInit {
+
+  @Input('inputtable') inputtable: boolean = false;
+  @ViewChild('container') container: ElementRef;
 
   constructor() {}
 
@@ -15,27 +18,28 @@ export class PopUpComponent implements OnInit {
 
   @HostListener('mouseenter')
   onMouseenter() {
-    this.popUpStyle = {'display' : 'block'};
+    if(!this.inputtable) this.container.nativeElement.style.display = 'block';
   }
 
   @HostListener('mouseleave')
   onMouseleave() {
-    this.popUpStyle = {'display' : 'none'};
+    if(!this.inputtable) this.hide();
   }
 
   @HostListener('click')
   onMouseClick() {
-    this.popUpStyle = {'display' : 'none'};
+    this.hide()
   }
 
   ngOnInit(): void {
-    this.popUpStyle = {
-      'display' : 'none'
-    };
   }
 
-  public close() {
-    this.popUpStyle = {'display' : 'none'};
+  public show(width: number | undefined) {
+    if(width) this.popUpStyle = {'width':`${width}px`};
+    this.container.nativeElement.style.display = 'block';
   }
 
+  public hide() {
+    if(this.container) this.container.nativeElement.style.display = 'none';
+  }
 }

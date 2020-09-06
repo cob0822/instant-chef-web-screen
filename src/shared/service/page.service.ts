@@ -7,7 +7,8 @@ export class PageService {
 
   constructor() { }
 
-  public isActive(type: string, url: string): boolean {
-    return !!url.match(new RegExp(`.*${type}.*`));
+  public isActive(type: string, url: string, isPerfect: boolean = false): boolean {
+    if(!isPerfect) return !!url.match(new RegExp(`^.*${type}.*$`));
+    return !!url.match(new RegExp(`^.*${type}$`));
   }
 }

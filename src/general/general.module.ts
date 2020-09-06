@@ -8,13 +8,15 @@ import { IndexComponent } from './index/index.component';
 import { UserComponent } from './user/user.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { PageService } from '../shared/service/page.service';
+import { NavComponent } from './nav/nav.component';
  
 @NgModule({
   declarations: [
     GeneralComponent,
     IndexComponent,
     UserComponent,
-    RecipeComponent
+    RecipeComponent,
+    NavComponent
   ],
   imports: [
     CommonModule,

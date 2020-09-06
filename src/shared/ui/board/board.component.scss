@@ -7,27 +7,11 @@
     border-radius: 5px;
     background-color: $yellow;
     padding: 20px;
-    height: 400px;
-}
-
-.header {
-    &__title {
-        border: 1px solid $orange;
-        border-radius: 5px;
-        width: fit-content;
-        font-weight: normal;
-        padding: 10px 30px;
-        background-color: $orange;
-        color: white;
-        font-size: $large;
-        margin: 0;
-    }
 }
 
 .list {
     border: 1px solid black;
     border-radius: 5px;
-    margin-top: 20px;
     background-color: $background;
     padding: 20px;
     height: 290px;

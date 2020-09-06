@@ -1,0 +1,69 @@
+<div class='container'>
+    <ul class='menu'>
+        <a [class.active]='page.isActive(PageTypeEnum.Top, url)'[routerLink]="'/'">
+            <mat-icon>home</mat-icon><span>ホーム</span>
+        </a>
+    </ul>
+    <mat-divider></mat-divider>
+    <ul class='menu'>
+        <a [class.active]='page.isActive(PageTypeEnum.RecipeMenu, url, true)' [routerLink]="'/recipes/menu'">
+            <mat-icon>restaurant</mat-icon><span>レシピ関連</span>
+        </a>
+        <li>
+            <a [class.active]='page.isActive(PageTypeEnum.Order, url, true)' [routerLink]="'/recipes/order'">
+                <mat-icon>pan_tool</mat-icon><span>レシピ注文</span>
+            </a>
+        </li>
+        <li>
+            <a>
+                <mat-icon>how_to_vote</mat-icon><span>レシピ提供</span>
+            </a>
+        </li>
+        <li>
+            <a>
+                <mat-icon>kitchen</mat-icon><span>レシピ作成</span>
+            </a>
+        </li>
+        <li>
+            <a>
+                <mat-icon>menu_book</mat-icon><span>レシピ一覧</span>
+            </a>
+        </li>
+        <li>
+            <a>
+                <mat-icon>grade</mat-icon><span>ランキング</span>
+            </a>
+        </li>
+    </ul>
+    <mat-divider></mat-divider>
+    <ul class='menu'>
+        <a>
+            <mat-icon>local_library</mat-icon><span>料理情報</span>
+        </a>
+    </ul>
+    <mat-divider></mat-divider>
+    <ul class='menu'>
+        <a>
+            <mat-icon>face</mat-icon><span>マイページ</span>
+        </a>
+        <li>
+            <a><mat-icon>history</mat-icon><span>注文履歴</span></a>
+        </li>
+        <li>
+            <a><mat-icon>watch_later</mat-icon><span>提供履歴</span></a>
+        </li>
+        <li>
+            <a><mat-icon>favorite</mat-icon><span>お気に入り</span></a>
+        </li>
+        <li>
+            <a><mat-icon>attach_file</mat-icon>クリップ</a>
+        </li>
+        <li>
+            <a><mat-icon>local_post_office</mat-icon><span>お知らせ</span></a>
+        </li>
+    </ul>
+    <mat-divider></mat-divider>
+    <ul class='menu'>
+        <a><mat-icon>contact_support</mat-icon>お問合せ</a>
+    </ul>
+</div>

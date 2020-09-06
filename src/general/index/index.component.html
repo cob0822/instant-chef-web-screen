@@ -1,22 +1,30 @@
 <div class='container'>
-    <section class='image-box'>
-        <img class='image-box__image' src='../../assets/images/top.png'>
-    </section>
-
-    <section class='ranking-board'>
+    <div class='ranking-board'>
+        <ui-sticky-note [size]='"large"'>
+            <span class='stickyNote'>週間ランキング</span>
+        </ui-sticky-note>
+        <div class='space'></div>
         <ui-board>
-            <div class='board-title'>週間レシピランキング</div>
             <button class='board-button' mat-raised-button>詳しくみる</button>
         </ui-board>
-    </section>
+    </div>
 
-    <section class='lists'>
-        <ui-card>
-            <div class='card-title'>週間ヒットワード</div>
-        </ui-card>
-        <ui-card>
-            <div class='card-title'>新着注文一覧</div>
-            <button class='card-button' mat-raised-button>詳しくみる</button>
-        </ui-card>
-    </section>
+    <div class='lists'>
+        <div>
+            <ui-sticky-note [size]='"large"'>
+                <span class='stickyNote'>週間ヒットワード</span>
+            </ui-sticky-note>
+            <div class='space'></div>
+            <ui-card></ui-card>
+        </div>
+        <div>
+            <ui-sticky-note [size]='"large"'>
+                <span class='stickyNote'>新着注文一覧</span>
+            </ui-sticky-note>
+            <div class='space'></div>
+            <ui-card>
+                <button class='card-button' mat-raised-button>詳しくみる</button>
+            </ui-card>
+        </div>
+    </div>
 </div>

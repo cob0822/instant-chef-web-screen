@@ -10,20 +10,6 @@
     height: 500px;
 }
 
-.header {
-    &__title {
-        border: 1px solid $orange;
-        border-radius: 5px;
-        font-weight: normal;
-        padding: 10px;
-        background-color: $orange;
-        color: white;
-        margin: 0;
-        font-size: $large;
-        text-align: center;
-    }
-}
-
 .list {
     border: 1px solid black;
     border-radius: 5px;
