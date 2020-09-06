@@ -12,22 +12,40 @@ export class PopUpTriggerDirective {
   @Input('enterable') isEnterable: false;
   @Input('leavable') isLeavable: false;
   @Input('clickable') isClickable: false;
-  @Input('all-allow') isAllowed: false;
+  @Input('isTemporary') isTemporary: false;
+  @Input('input') input?: string;
+  @Input('inputtable') inputtable: false;
+  @Input('width') width?: number;
+  @Input('isOutputAction') isOutputAction: boolean | undefined = undefined;
 
 
   @HostListener('mouseenter')
   onMouseenter() {
-    if(this.isEnterable || this.isAllowed) this.target.popUpStyle = {'display' : 'block'};
+    if(this.isEnterable || this.isTemporary) this.target.show(this.width);
   }
 
   @HostListener('mouseleave')
   onMouseleave() {
-    if(this.isLeavable || this.isAllowed) this.target.popUpStyle = {'display' : 'none'};
+    if(this.isLeavable || this.isTemporary) this.target.hide();
   }
 
   @HostListener('click')
   onMouseClick() {
-    if(this.isClickable || this.isAllowed) this.target.popUpStyle = {'display' : 'none'};
+    if(this.isClickable || this.isTemporary) this.target.hide();
+  }
+
+  ngOnChanges() {
+    if(this.input && this.inputtable) {
+      this.target.show(this.width);
+    }else if(!this.input && this.inputtable) {
+      if(this.target.container) this.target.hide();
+    }
+
+    if(this.isOutputAction == true) {
+      this.target.show(this.width);
+    }else if(this.isOutputAction == false) {
+      this.target.hide();
+    }
   }
 
 }
