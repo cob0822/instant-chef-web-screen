@@ -1,0 +1,23 @@
+@import '../../../scss/color.scss';
+@import '../../../scss/font-size.scss';
+
+.container {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 0 10px 10px 0;
+    text-align: center;
+    color: $deep-brown;
+    margin: 0;
+    letter-spacing: 3px;
+    display: flex;
+    background-color: $yellow;
+    align-items: center;
+}
+
+mat-icon {
+    height: 100%;
+}
+
+.hidden {
+    display: none;
+}
