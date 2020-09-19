@@ -1,8 +1,8 @@
 <div class='container'>
     <form class='formGroup' [formGroup]='inputData' (ngSubmit)='onSubmit()'>
         <mat-form-field class='formGroup__name-form' appearance="outline" color='warn'> 
-            <mat-label>ユーザー名</mat-label>
-            <input matInput formControlName='name'>
+            <mat-label>メールアドレス</mat-label>
+            <input matInput formControlName='email' placeholder="****@example.com">
         </mat-form-field>
 
         <mat-form-field class='formGroup__password-form' appearance="outline" color='warn'>

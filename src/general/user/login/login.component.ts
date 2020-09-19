@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.inputData = this.formBuilder.group({
-      name: new FormControl('', [ Validators.required ]),
+      email: new FormControl('', [ Validators.required, Validators.email ]),
       password: new FormControl('', [ Validators.required ]),
     });
   }
@@ -34,11 +34,12 @@ export class LoginComponent implements OnInit {
   public onSubmit(): void {
 
     let userInput: User = {
-      name: '',
+      email: undefined,
       password: '',
     }
     
     Object.assign(userInput, this.inputData.value);
+    console.log(userInput);
 
     this.account.login(userInput).subscribe((response: User) => {
       console.log(response);

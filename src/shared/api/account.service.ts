@@ -15,6 +15,6 @@ export class AccountService {
   }
 
   public login(userInput: User): Observable<User> {
-    return this.http.post<User>('/api/login', {userInput});
+    return this.http.post<User>('/api/auth/login', {userInput});
   }
 }
