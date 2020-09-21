@@ -16,7 +16,7 @@
                 <section class='required-info__content'>
                     <div class='required-info__title'>
                         <ui-sticky-note [size]='"medium"' [left-icon]='"help"' (action)='isShow = $event'
-                            dirPopUpTrigger [target]='explainPopup' [isOutputAction]='isShow' [width]='600'>
+                            dirPopUpTrigger [target]='explainPopup' [isOutputAction]='isShow'>
                             <span class='stickyNote'>ジャンル</span>
                         </ui-sticky-note>
                         <button class='required-info__title--button' mat-flat-button (click)='addGenre.openDialog()'>
@@ -36,7 +36,7 @@
                         </div>
                         <mat-icon class='required-info__form--searchIcon'>search</mat-icon>
                         <div class='required-info__form--inner'>
-                            <input #form type='text' [(ngModel)]='input'
+                            <input #form type='text' [(ngModel)]='input' (ngModelChange)='onSearchGenre()'
                                 dirPopUpTrigger [target]='resultPopup' [input]='input' [inputtable]='true' [width]='200' 
                                 (focus)='isFocus = true' (blur)='isFocus = false' />
                             <ui-pop-up #resultPopup [inputtable]='true'>

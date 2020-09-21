@@ -4,6 +4,7 @@ import { PageService } from '../../../shared/service/page.service';
 import { PageType } from '../../../shared/enum/page-type';
 import { AddGenreDialogService } from '../../../shared/dialog/add-genre-dialog/add-genre-dialog.service';
 import { MatInput } from '@angular/material/input';
+import { OrderService as ApiOrderService } from '../../../shared/api/order.service';
 
 @Component({
   selector: 'app-order',
@@ -49,34 +50,38 @@ export class OrderComponent implements OnInit {
   constructor(private router: Router,
               readonly page: PageService,
               readonly addGenre: AddGenreDialogService,
+              private apiOrder: ApiOrderService,
               private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.activeList = this.results[0];
   }
+
+  public onSearchGenre() {
+    if(this.input && this.input.trim()) {
+      this.apiOrder.searchGenre(this.input).subscribe(results => {
+        console.log(results);
+      });
+    }
+  }
   
-  addTag(result: string) {
+  public addTag(result: string) {
     this.isTagVisible = true;
     this.input = undefined;
     if(!this.selectedInputs.includes(result)) this.selectedInputs.push(result);
     this.activeList = this.results[0];
   }
 
-  removeTag(selectedInput: string) {
+  public removeTag(selectedInput: string) {
     this.selectedInputs = this.selectedInputs.filter(v => { return v !== selectedInput});
     this.activeList = this.results[0];
   }
 
-  onFormFocus() {
+  public onFormFocus() {
     this.form.nativeElement.focus();
   }
 
-  onSelectDateFormFocus() {
-    console.log('a');
+  public onSelectDateFormFocus() {
     this.selectDateForm.focus();
-  }
-
-  console(event: boolean) {
-    console.log(event);
   }
 }
