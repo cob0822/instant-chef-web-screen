@@ -30,11 +30,11 @@
                     </ui-pop-up>
                     
                     <div class='required-info__form' [class.focus]='isFocus' (click)='onFormFocus()'>
+                        <mat-icon class='required-info__form--searchIcon'>search</mat-icon>
                         <div *ngFor='let selectInput of selectedInputs' class='required-info__form--tag mat-elevation-z2'>
                             <mat-icon (click)='removeTag(selectInput)'>remove_circle</mat-icon>
                             <div>{{selectInput}}</div>
                         </div>
-                        <mat-icon class='required-info__form--searchIcon'>search</mat-icon>
                         <div class='required-info__form--inner'>
                             <input #form type='text' [(ngModel)]='input' (ngModelChange)='onSearchGenre()'
                                 dirPopUpTrigger [target]='resultPopup' [input]='input' [inputtable]='true' [width]='200' 
