@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/index';
 
 @Injectable({
@@ -10,6 +10,7 @@ export class OrderService {
   constructor(protected http: HttpClient) { }
 
   public searchGenre(keyword: string): Observable<string[]> {
-    return this.http.post<string[]>('/api/order/genre', {keyword: keyword});
+    let param = new HttpParams().set('keyword', keyword);
+    return this.http.get<string[]>('/api/order', {params: param});
   }
 }
