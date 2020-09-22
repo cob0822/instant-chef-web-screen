@@ -5,6 +5,7 @@ import { IndexComponent } from './index/index.component';
 import { OrderComponent } from './order/order.component';
 import { RecipeRoutingModule } from './recipe-routing.module';
 import { PageService } from '../../shared/service/page.service';
+import { OrderService as ApiOrderService } from '../../shared/api/order.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PageService } from '../../shared/service/page.service';
     ShareModule
   ],
   providers: [
-    PageService
+    PageService,
+    ApiOrderService
   ]
 })
 export class RecipeModule { }
