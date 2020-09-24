@@ -11,6 +11,6 @@ export class OrderService {
 
   public searchGenre(keyword: string): Observable<string[]> {
     let param = new HttpParams().set('keyword', keyword);
-    return this.http.get<string[]>('/api/order', {params: param});
+    return this.http.get<string[]>('/api/orders', {params: param});
   }
 }
