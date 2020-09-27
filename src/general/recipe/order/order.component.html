@@ -36,7 +36,7 @@
                             <div>{{selectInput}}</div>
                         </div>
                         <div class='required-info__form--inner'>
-                            <input #form type='text' [(ngModel)]='input' (change)='onSearchGenre()'
+                            <input #form type='text' [(ngModel)]='input' (ngModelChange)='onSearchGenre()'
                                 dirPopUpTrigger [target]='resultPopup' [input]='input' [inputtable]='true' [width]='200' 
                                 (focus)='isFocus = true' (blur)='isFocus = false' />
                             <ui-pop-up #resultPopup [inputtable]='true'>
@@ -61,24 +61,16 @@
                         </ui-sticky-note>
                     </div>
                     <div class='required-info__selector'>
-                        <mat-form-field appearance="fill">
-                            <mat-label>希望日</mat-label>
-                            <mat-select #dateSelector [(ngModel)]='selectedDate' (selectionChange)='selectedDate == "詳細入力"? onSelectDateFormFocus():""'>
-                                <mat-option [value]="'１週間以内'">１週間以内</mat-option>
-                                <mat-option [value]="'３週間以内'">３週間以内</mat-option>
-                                <mat-option [value]="'１ヶ月以内'">１ヶ月以内</mat-option>
-                                <mat-option [value]="'３ヶ月以内'">３ヶ月以内</mat-option>
-                                <mat-option [value]="'半年以内'">半年以内</mat-option>
-                                <mat-option [value]="'いつでも良い'">いつでも良い</mat-option>
-                                <mat-option [value]="'詳細入力'" matTooltip='詳細な日時を手入力できます' matTooltipPosition="right">詳細入力</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        <mat-radio-group class='required-info__selector--radio-button' [(ngModel)]='selectedDateType'>
+                            <mat-radio-button [value]='"detail"'>日付を指定する</mat-radio-button>
+                            <mat-radio-button [value]='"always"'>いつでも良い</mat-radio-button>
+                        </mat-radio-group>
 
-                        <mat-form-field class='required-info__selector--detail-input' appearance="fill" [class.visible]='selectedDate == "詳細入力"'>
-                            <mat-label>詳細入力</mat-label>
-                            <input #selectDateForm='matInput' matInput [matDatepicker]="picker1">
-                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                            <mat-datepicker #picker1></mat-datepicker>
+                        <mat-form-field class='required-info__selector--detail-input' appearance="fill" [class.visible]='selectedDateType == "detail"'>
+                            <mat-label>日付の指定</mat-label>
+                            <input #selectDateForm='matInput' matInput [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #picker></mat-datepicker>
                         </mat-form-field>
                     </div>
                 </section>
