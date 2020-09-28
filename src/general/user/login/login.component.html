@@ -1,4 +1,5 @@
-<div class='container'>
+<div class='container' *ngIf='!isLoading'>
+    <div class='errorMessage' *ngIf='errorMessage'>{{errorMessage}}</div>
     <form class='formGroup' [formGroup]='inputData' (ngSubmit)='onSubmit()'>
         <mat-form-field class='formGroup__name-form' appearance="outline" color='warn'> 
             <mat-label>メールアドレス</mat-label>
@@ -18,4 +19,10 @@
         </div>
     </form>
 </div>
+
+<ng-container *ngIf='isLoading'>
+    <div class='spinner-container'>
+        <ui-spinner [size]='"large"'></ui-spinner>
+    </div>
+</ng-container>
 

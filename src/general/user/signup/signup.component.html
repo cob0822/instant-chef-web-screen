@@ -1,4 +1,5 @@
-<div class='container'>
+<div class='container' *ngIf='!isLoading'>
+    <div class='errorMessage' *ngIf='errorMessage'>{{errorMessage}}</div>
     <form class='formGroup' [formGroup]='inputData' (ngSubmit)='onSubmit()'>
         <mat-form-field class='formGroup__name-form' appearance="outline" color='warn'> 
             <mat-label>ユーザー名</mat-label>
@@ -55,4 +56,10 @@
             <button class='formGroup__button--submit' mat-raised-button type="submit" [disabled]='inputData.invalid'><mat-icon>perm_identity</mat-icon><span>無料登録する</span></button>
         </div>
     </form>
+    
 </div>
+<ng-container *ngIf='isLoading'>
+    <div class='spinner-container'>
+        <ui-spinner [size]='"large"'></ui-spinner>
+    </div>
+</ng-container>

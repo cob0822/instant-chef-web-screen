@@ -10,6 +10,7 @@ export class StickyNoteComponent implements OnInit {
   @Input('size') size?: string;
   @Input('right-icon') rightIcon?: string;
   @Input('left-icon') leftIcon?: string;
+  @Input('width') width?: number;
   @Output() action = new EventEmitter<boolean>();
 
   constructor() { }

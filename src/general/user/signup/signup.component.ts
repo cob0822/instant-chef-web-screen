@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { User } from '../../../shared/model/user';
 import { AccountService } from '../../../shared/api/account.service';
-import { never } from 'rxjs';
+import { AuthService } from '../../../shared/service/auth.service';
+import { UserService } from '../../../shared/service/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -31,12 +33,34 @@ export class SignupComponent implements OnInit {
     return <FormControl>this.inputData.get('passwordConfirm');
   }
 
+  get errorMessage(): string | undefined {
+    return this._errorMessage;
+  }
+
+  set errorMessage(message: string | undefined) {
+    this._errorMessage = message;
+  }
+
+  get isLoading(): boolean {
+    return this._isLoading;
+  }
+
+  set isLoading(status: boolean) {
+    this._isLoading = status;
+  }
+
   constructor(private formBuilder: FormBuilder,
-              private account: AccountService) { }
+              private account: AccountService,
+              private user: UserService,
+              private auth: AuthService,
+              private changeDetector: ChangeDetectorRef,
+              private router: Router) { }
 
   public isPasswordHidden: boolean = true;
   public isConfirmHidden: boolean = true;
   public inputData: FormGroup;
+  public _errorMessage?: string;
+  public _isLoading: boolean = false;
 
   public getErrorMessage(form: FormControl): string[] {
     let errorMessages: string[] = [];
@@ -87,8 +111,11 @@ export class SignupComponent implements OnInit {
   }
 
   public onSubmit(): void {
+    this.isLoading = true;
+    this.errorMessage = undefined;
+    
     let userInput: User = {
-      name: '',
+      name: undefined,
       email: undefined,
       phone_number: undefined,
       password: '',
@@ -97,8 +124,18 @@ export class SignupComponent implements OnInit {
     
     Object.assign(userInput, this.inputData.value);
 
-    this.account.signup(userInput).subscribe(response => {
-      console.log(response);
+    this.account.signup(userInput)
+      .subscribe(response => {
+        this.auth.loginInfo = response;
+        this.user.userInfo = response;
+        this.router.navigate(['/']);
+      },error => {
+        this.email.setValue(undefined);
+        this.password.setValue(undefined);
+        this.passwordConfirm.setValue(undefined);
+        this.errorMessage = '入力したメールアドレスは既に登録されています。';
+        this.isLoading = false;
+        this.changeDetector.markForCheck();
     });
   }
 
@@ -107,5 +144,9 @@ export class SignupComponent implements OnInit {
     let passwordConfirm = group.controls.passwordConfirm.value;
 
     return group.controls.passwordConfirm.setErrors(password === passwordConfirm? null : { notSame: true });
+  }
+
+  test() {
+    this.auth.isLogined = true;
   }
 }

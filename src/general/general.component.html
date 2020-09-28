@@ -1,15 +1,20 @@
 <div class='container'>
     <header>
         <section class='head-line'>
-            <a class='head-line__left' [routerLink]="'/'">
-                <!-- <img class='head-line__left--image' src='./assets/images/chef_hat.png'> -->
-                <div class='head-line__left--title'>
-                    <h1 class='main-title'>Instant Chef</h1>
-                    <div class='sub-title'>料理が大好きなあなたへ</div>
-                </div>
-            </a>
+            <div class='logo'>
+                <button class='logo__fab-button' mat-mini-fab dirSideNavTrigger [target]='nav' [targetHiddenWidth]='250' [overlay]='overlay' [screenWidth]='innerWidth' [changeWidth]='1400'>
+                    <mat-icon>dehaze</mat-icon>
+                </button>
+                <a class='logo__title' [routerLink]="'/'">
+                    <!-- <img class='head-line__left--image' src='./assets/images/chef_hat.png'> -->
+                    <div class='logo__title--right'>
+                        <h1 class='main-title'>Instant Chef</h1>
+                        <div class='sub-title'>料理が大好きなあなたへ</div>
+                    </div>
+                </a>
+            </div>
 
-            <section class='search'>
+            <div class='search'>
                 <form class='search__keyword-form'>
                     <div class='search__keyword-form--inner'>
                         <mat-icon>search</mat-icon>
@@ -17,33 +22,60 @@
                     </div>
                     <button class='search__keyword-form--submit' type='submit' mat-flat-button>検索</button>
                 </form>
-            </section>
-                
-            <div class='head-line__right'>
-                <button [class.active]='page.isActive(PageTypeEnum.Signup, url)' [routerLink]="'/users/signup'" mat-flat-button><mat-icon>perm_identity</mat-icon><span>無料登録</span></button>
-                <button class='head-line__right--log-in' [class.active]='page.isActive(PageTypeEnum.Login, url)' [routerLink]="'/users/login'" mat-flat-button><mat-icon>login</mat-icon><span>ログイン</span></button>
             </div>
+                
+            <div class='head-line__right' *ngIf='!isLogined; else logined'>
+                <button [class.active]='page.isActive(PageTypeEnum.Signup, url)' [routerLink]="'/signup'" mat-flat-button><mat-icon>perm_identity</mat-icon><span>無料登録</span></button>
+                <button class='head-line__right--log-in' [class.active]='page.isActive(PageTypeEnum.Login, url)' [routerLink]="'/login'" mat-flat-button><mat-icon>login</mat-icon><span>ログイン</span></button>
+            </div>
+            <ng-template #logined>
+                <div class='head-line__right'>
+                    <button class='head-line__right--user-button' mat-flat-button [matMenuTriggerFor]="menu"><mat-icon>person</mat-icon>{{user.userName}}&ensp;さん</button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)='auth.logout()'>ログアウト</button>
+                        <button (click)='auth.removeLocalStorage()'>テスト</button>
+                      </mat-menu>
+                </div>
+            </ng-template>
         </section>
     </header>
 
     <section class='content'>
-        <section class='content__nav'>
+        <section class='content__nav' #nav>
             <app-nav></app-nav>
         </section>
 
         <section class='content__feature'>
-            <div *ngIf='!page.isActive(PageTypeEnum.User, url)' class='image-box'>
+            <div *ngIf='!page.isActive(PageTypeEnum.Signup, url) && !page.isActive(PageTypeEnum.Login, url)' class='image-box'>
                 <img [src]='imagePath'>
             </div>
-            <div class='content__grid' [class.userPage]='page.isActive(PageTypeEnum.User, url)'>
+            <div class='content__grid' [class.userPage]='page.isActive(PageTypeEnum.Signup, url) || page.isActive(PageTypeEnum.Login, url)'>
                 <div class='content__grid--left'>
                     <router-outlet></router-outlet>
                 </div>
-                <div *ngIf='!page.isActive(PageTypeEnum.User, url)' class='content__grid--right'>
-                    
+                <div *ngIf='!page.isActive(PageTypeEnum.Signup, url) && !page.isActive(PageTypeEnum.Login, url)' class='content__grid--right'>
+                    <div class='board'>
+                        <ui-sticky-note [size]='"large"' [width]='180'>
+                            <span class='stickyNote'>週間ランキング</span>
+                        </ui-sticky-note>
+                        <div class='space'></div>
+                        <ui-board>
+                            <button class='board-button' mat-raised-button>詳しくみる</button>
+                        </ui-board>
+                    </div>
+
+                    <div class='board'>
+                        <ui-sticky-note [size]='"large"' [width]='180'>
+                            <span class='stickyNote'>新着注文一覧</span>
+                        </ui-sticky-note>
+                        <div class='space'></div>
+                        <ui-board>
+                            <button class='board-button' mat-raised-button>詳しくみる</button>
+                        </ui-board>
+                    </div>
                 </div>
             </div>
-            <footer class='footer' *ngIf='!page.isActive(PageTypeEnum.User, url)'>
+            <footer class='footer' *ngIf='!page.isActive(PageTypeEnum.Signup, url) && !page.isActive(PageTypeEnum.Login, url)'>
                 <ul class='footer__list'>
                     <li ><a [routerLink]="'/'">ホーム</a></li>
                 </ul>
@@ -51,3 +83,5 @@
         </section>
     </section>
 </div>
+
+<div class='overlay' #overlay></div>

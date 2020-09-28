@@ -111,15 +111,24 @@
 
             &__selector {
                 display: flex;
+                flex-direction: column;
                 width: fit-content;
+
+                &--radio-button {
+                    margin-bottom: 30px;
+
+                    mat-radio-button:nth-child(2) {
+                        margin-left: 30px;
+                    }
+                }
 
                 &--detail-input {
                     padding: 0 20px;
-                    visibility: hidden;
+                    display: none;
                 }
 
                 .visible {
-                    visibility: visible;
+                    display: block;
                 }
             }
 

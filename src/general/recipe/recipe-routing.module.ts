@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RecipeComponent } from './recipe.component';
 import { OrderComponent } from './order/order.component';
 import { IndexComponent } from './index/index.component';
+import { AuthGuard } from '../../shared/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,7 +12,8 @@ const routes: Routes = [
     children: [
       {
         path: 'order',
-        component: OrderComponent
+        component: OrderComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'menu',

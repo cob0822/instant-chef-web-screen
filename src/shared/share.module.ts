@@ -15,6 +15,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [],
@@ -35,7 +38,10 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSidenavModule,
+    MatRadioModule,
+    MatMenuModule
   ],
   exports: [
     UiModule,
@@ -53,7 +59,10 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSidenavModule,
+    MatRadioModule,
+    MatMenuModule
   ],
 })
 export class ShareModule { }

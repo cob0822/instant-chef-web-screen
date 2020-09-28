@@ -6,6 +6,8 @@ import { OrderComponent } from './order/order.component';
 import { RecipeRoutingModule } from './recipe-routing.module';
 import { PageService } from '../../shared/service/page.service';
 import { OrderService as ApiOrderService } from '../../shared/api/order.service';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { JPDateAdapter } from '../../shared/other/jp-dateadapter';
 
 @NgModule({
   declarations: [
@@ -15,11 +17,12 @@ import { OrderService as ApiOrderService } from '../../shared/api/order.service'
   imports: [
     RecipeRoutingModule,
     CommonModule,
-    ShareModule
+    ShareModule,
   ],
   providers: [
     PageService,
-    ApiOrderService
+    ApiOrderService,
+    {provide: MAT_DATE_LOCALE, useValue: JPDateAdapter}
   ]
 })
 export class RecipeModule { }

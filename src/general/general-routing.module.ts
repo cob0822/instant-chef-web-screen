@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GeneralComponent } from './general.component';
 import { IndexComponent } from './index/index.component';
-
+import { SignupComponent } from './user/signup/signup.component';
+import { LoginComponent } from './user/login/login.component';
 
 const routes: Routes = [
   {
@@ -14,12 +15,20 @@ const routes: Routes = [
         component: IndexComponent,
       },
       {
-        path: 'users',
-        loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+        path: 'signup',
+        component: SignupComponent
+      },
+      {
+        path: 'login',
+        component: LoginComponent
       },
       {
         path: 'recipes',
         loadChildren: () => import('./recipe/recipe.module').then(m => m.RecipeModule)
+      },
+      {
+        path: '**',
+        redirectTo: ''
       }
     ]
   }

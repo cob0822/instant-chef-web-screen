@@ -5,6 +5,7 @@ import { CardModule } from './card/card.module';
 import { PopUpModule } from './pop-up/pop-up.module';
 import { ListModule } from './list/list.module';
 import { StickyNoteModule } from './sticky-note/sticky-note.module';
+import { SpinnerModule } from './spinner/spinner.module';
 
 @NgModule({
   declarations: [],
@@ -14,14 +15,16 @@ import { StickyNoteModule } from './sticky-note/sticky-note.module';
     CardModule,
     PopUpModule,
     ListModule,
-    StickyNoteModule
+    StickyNoteModule,
+    SpinnerModule
   ],
   exports: [
     BoardModule,
     CardModule,
     PopUpModule,
     ListModule,
-    StickyNoteModule
+    StickyNoteModule,
+    SpinnerModule
   ]
 })
 export class UiModule { }

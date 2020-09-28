@@ -9,17 +9,17 @@
         <a [class.active]='page.isActive(PageTypeEnum.RecipeMenu, url, true)' [routerLink]="'/recipes/menu'">
             <mat-icon>restaurant</mat-icon><span>レシピ関連</span>
         </a>
-        <li>
+        <li *ngIf='isLogined'>
             <a [class.active]='page.isActive(PageTypeEnum.Order, url, true)' [routerLink]="'/recipes/order'">
                 <mat-icon>pan_tool</mat-icon><span>レシピ注文</span>
             </a>
         </li>
-        <li>
+        <li *ngIf='isLogined'>
             <a>
                 <mat-icon>how_to_vote</mat-icon><span>レシピ提供</span>
             </a>
         </li>
-        <li>
+        <li *ngIf='isLogined'>
             <a>
                 <mat-icon>kitchen</mat-icon><span>レシピ作成</span>
             </a>
@@ -41,8 +41,8 @@
             <mat-icon>local_library</mat-icon><span>料理情報</span>
         </a>
     </ul>
-    <mat-divider></mat-divider>
-    <ul class='menu'>
+    <mat-divider *ngIf='isLogined'></mat-divider>
+    <ul class='menu' *ngIf='isLogined'>
         <a>
             <mat-icon>face</mat-icon><span>マイページ</span>
         </a>
@@ -66,4 +66,10 @@
     <ul class='menu'>
         <a><mat-icon>contact_support</mat-icon>お問合せ</a>
     </ul>
+    <mat-divider></mat-divider>
+    <ul class='menu'>
+        <a *ngIf='!isLogined' [class.active]='page.isActive(PageTypeEnum.Login, url, true)' [routerLink]="'/users/login'"><mat-icon>login</mat-icon>ログイン</a>
+        <a *ngIf='isLogined' (click)='auth.logout()' [routerLink]="'/'"><mat-icon>reply</mat-icon>ログアウト</a>
+    </ul>
+
 </div>

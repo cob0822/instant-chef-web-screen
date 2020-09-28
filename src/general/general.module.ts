@@ -4,19 +4,23 @@ import { ShareModule } from '../shared/share.module';
 import { GeneralComponent } from './general.component';
 import { GeneralRoutingModule } from './general-routing.module';
 import { IndexComponent } from './index/index.component';
-
-import { UserComponent } from './user/user.component';
 import { RecipeComponent } from './recipe/recipe.component';
+import { SignupComponent } from './user/signup/signup.component';
+import { LoginComponent } from './user/login/login.component';
 import { PageService } from '../shared/service/page.service';
 import { NavComponent } from './nav/nav.component';
+import { AuthService } from '../shared/service/auth.service';
+import { AccountService } from '../shared/api/account.service';
+import { UserService } from '../shared/service/user.service';
  
 @NgModule({
   declarations: [
     GeneralComponent,
     IndexComponent,
-    UserComponent,
     RecipeComponent,
-    NavComponent
+    NavComponent,
+    SignupComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +28,10 @@ import { NavComponent } from './nav/nav.component';
     GeneralRoutingModule,
   ],
   providers: [
-    PageService
+    PageService,
+    AuthService,
+    AccountService,
+    UserService
   ],
   exports: [
     ShareModule,

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from '../../../shared/model/user';
 import { AccountService } from '../../../shared/api/account.service';
+import { AuthService } from '../../../shared/service/auth.service';
+import { UserService } from '../../../shared/service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +13,41 @@ import { AccountService } from '../../../shared/api/account.service';
 })
 export class LoginComponent implements OnInit {
 
-  get name(): FormControl {
-    return <FormControl>this.inputData.get('name');
+  get email(): FormControl {
+    return <FormControl>this.inputData.get('email');
   }
 
   get password(): FormControl {
     return <FormControl>this.inputData.get('password');
   }
 
+  get errorMessage(): string | undefined {
+    return this._errorMessage;
+  }
+
+  set errorMessage(message: string | undefined) {
+    this._errorMessage = message;
+  }
+
+  get isLoading(): boolean {
+    return this._isLoading;
+  }
+
+  set isLoading(status: boolean) {
+    this._isLoading = status;
+  }
+
   constructor(public formBuilder: FormBuilder,
-              private account: AccountService) { }
+              private user: UserService,
+              private auth: AuthService,
+              private account: AccountService,
+              private changeDetector: ChangeDetectorRef,
+              private router: Router) { }
 
   public inputData: FormGroup;
   public isHidden: boolean = true;
+  public _errorMessage?: string;
+  public _isLoading: boolean = false;
 
   ngOnInit(): void {
     this.inputData = this.formBuilder.group({
@@ -32,6 +57,7 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit(): void {
+    this.isLoading = true;
 
     let userInput: User = {
       email: undefined,
@@ -39,10 +65,20 @@ export class LoginComponent implements OnInit {
     }
     
     Object.assign(userInput, this.inputData.value);
-    console.log(userInput);
 
-    this.account.login(userInput).subscribe((response: User) => {
-      console.log(response);
+    this.account.login(userInput)
+      .subscribe(response => {
+        console.log('login:'+ response);
+        this.auth.loginInfo = response;
+        this.user.userInfo = response;
+        this.router.navigate(['/']);
+      },error => {
+        console.log('error:'+ error);
+        this.email.setValue(undefined);
+        this.password.setValue(undefined);
+        this.errorMessage = 'メールアドレスかパスワードが一致していません。';
+        this.isLoading = false;
+        this.changeDetector.markForCheck();
     });
   }
 }

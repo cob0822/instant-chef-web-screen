@@ -13,6 +13,7 @@ export class StickyNoteDirective {
 
   @Input('size') size?: string;
   @Input('target') target?: string;
+  @Input('width') width?: number;
 
   ngOnChanges() {
     if(!this.target || this.target == 'container') {
@@ -77,6 +78,10 @@ export class StickyNoteDirective {
           this.htmlElement.style.marginLeft = '10px';
         break;
       }
+    }
+
+    if(this.width) {
+      this.htmlElement.style.width = `${this.width}px`;
     }
   }
 

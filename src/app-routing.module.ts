@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./general/general.module').then(m => m.GeneralModule)
+    loadChildren: () => import('./general/general.module').then(m => m.GeneralModule),
   }
 ];
 
