@@ -6,10 +6,11 @@ import { AddGenreDialogService } from '../../../shared/dialog/add-genre-dialog/a
 import { MatInput } from '@angular/material/input';
 import { OrderService as ApiOrderService } from '../../../shared/api/order.service';
 
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss'],
+  styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
 
@@ -21,7 +22,7 @@ export class OrderComponent implements OnInit {
   isTagVisible: boolean = false;
   isFocus: boolean = false;
   isShow: boolean = false;
-  selectedDate: string = '１週間以内';
+  selectedDateType: string = 'detail';
   _selectedInputs: string[] = [];
   _activeList: string;
   results: string[] = ['日本料理', 'フランス料理', 'ドイツ料理', 'イタリア料理', 'タイ料理'];
@@ -57,9 +58,9 @@ export class OrderComponent implements OnInit {
     this.activeList = this.results[0];
   }
 
-  public onSearchGenre() {
+  public onSearchCategory() {
     if(this.input && this.input.trim()) {
-      this.apiOrder.searchGenre(this.input).subscribe(results => {
+      this.apiOrder.searchCategory(this.input).subscribe(results => {
         console.log(results);
       });
     }
