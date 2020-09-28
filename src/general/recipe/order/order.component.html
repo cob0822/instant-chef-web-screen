@@ -36,7 +36,7 @@
                             <div>{{selectInput}}</div>
                         </div>
                         <div class='required-info__form--inner'>
-                            <input #form type='text' [(ngModel)]='input' (ngModelChange)='onSearchGenre()'
+                            <input #form type='text' [(ngModel)]='input' (ngModelChange)='onSearchCategory()'
                                 dirPopUpTrigger [target]='resultPopup' [input]='input' [inputtable]='true' [width]='200' 
                                 (focus)='isFocus = true' (blur)='isFocus = false' />
                             <ui-pop-up #resultPopup [inputtable]='true'>
