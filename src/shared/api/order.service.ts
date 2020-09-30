@@ -9,7 +9,7 @@ export class OrderService {
 
   constructor(protected http: HttpClient) { }
 
-  public searchCategory(keyword: string): Observable<string[]> {
-    return this.http.get<string[]>('/api/orders/categories', {params: new HttpParams().set('keyword', keyword)});
+  public searchCategory(keyword: string): Observable<{id: number, name: string}[]> {
+    return this.http.get<{id: number, name: string}[]>('/api/orders/categories', {params: new HttpParams().set('keyword', keyword)});
   }
 }

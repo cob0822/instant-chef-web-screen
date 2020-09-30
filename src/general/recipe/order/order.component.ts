@@ -25,7 +25,7 @@ export class OrderComponent implements OnInit {
   selectedDateType: string = 'detail';
   _selectedInputs: string[] = [];
   _activeList: string;
-  results: string[] = ['日本料理', 'フランス料理', 'ドイツ料理', 'イタリア料理', 'タイ料理'];
+  searchedCategories: {id: number, name: string}[] = [];
 
   get selectedInputs(): string[] {
     return this._selectedInputs;
@@ -55,27 +55,26 @@ export class OrderComponent implements OnInit {
               private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.activeList = this.results[0];
   }
 
   public onSearchCategory() {
+    this.searchedCategories = [];
     if(this.input && this.input.trim()) {
       this.apiOrder.searchCategory(this.input).subscribe(results => {
-        console.log(results);
+        this.searchedCategories = results;
+        if(results.length > 0) this.activeList = this.searchedCategories[0].name;
       });
     }
   }
   
-  public addTag(result: string) {
+  public addTag(searchedCategory: {id: number, name: string}) {
     this.isTagVisible = true;
     this.input = undefined;
-    if(!this.selectedInputs.includes(result)) this.selectedInputs.push(result);
-    this.activeList = this.results[0];
+    if(!this.selectedInputs.includes(searchedCategory.name)) this.selectedInputs.push(searchedCategory.name);
   }
 
   public removeTag(selectedInput: string) {
     this.selectedInputs = this.selectedInputs.filter(v => { return v !== selectedInput});
-    this.activeList = this.results[0];
   }
 
   public onFormFocus() {

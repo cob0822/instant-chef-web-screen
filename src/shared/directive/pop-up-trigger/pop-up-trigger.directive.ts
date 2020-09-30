@@ -13,7 +13,7 @@ export class PopUpTriggerDirective {
   @Input('leavable') isLeavable: false;
   @Input('clickable') isClickable: false;
   @Input('isTemporary') isTemporary: false;
-  @Input('input') input?: string;
+  @Input('isVisible') isVisible?: boolean;
   @Input('inputtable') inputtable: false;
   @Input('width') width?: number;
   @Input('isOutputAction') isOutputAction: boolean | undefined = undefined;
@@ -35,9 +35,9 @@ export class PopUpTriggerDirective {
   }
 
   ngOnChanges() {
-    if(this.input && this.inputtable) {
+    if(this.isVisible && this.inputtable) {
       this.target.show(this.width);
-    }else if(!this.input && this.inputtable) {
+    }else if(!this.isVisible && this.inputtable) {
       if(this.target.container) this.target.hide();
     }
 
