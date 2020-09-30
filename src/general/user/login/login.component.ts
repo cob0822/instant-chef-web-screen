@@ -68,17 +68,23 @@ export class LoginComponent implements OnInit {
 
     this.account.login(userInput)
       .subscribe(response => {
-        console.log('login:'+ response);
-        this.auth.loginInfo = response;
-        this.user.userInfo = response;
-        this.router.navigate(['/']);
+        if(response.user) {
+          this.auth.loginInfo = response;
+          this.user.userInfo = response;
+          this.router.navigate(['/']);
+        }
+        this.handleError();
+        
       },error => {
-        console.log('error:'+ error);
-        this.email.setValue(undefined);
-        this.password.setValue(undefined);
-        this.errorMessage = 'メールアドレスかパスワードが一致していません。';
-        this.isLoading = false;
-        this.changeDetector.markForCheck();
+        this.handleError();
     });
+  }
+
+  private handleError() {
+    this.email.setValue(undefined);
+    this.password.setValue(undefined);
+    this.errorMessage = 'メールアドレスかパスワードが一致していません。';
+    this.isLoading = false;
+    this.changeDetector.markForCheck();
   }
 }

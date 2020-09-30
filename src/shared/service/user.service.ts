@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
-import { ResponseWithToken } from '../model/with-access-token';
+import { WithAccessToken } from '../model/with-access-token';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class UserService {
     this._userName = name;
   }
   
-  set userInfo(info: ResponseWithToken<User>) {
+  set userInfo(info: WithAccessToken<User>) {
     this.userName = info.user.name!;
   }
 
