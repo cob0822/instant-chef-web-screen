@@ -61,7 +61,7 @@ export class OrderComponent implements OnInit {
     this.searchedCategories = [];
     if(this.input && this.input.trim()) {
       this.apiOrder.searchCategory(this.input).subscribe(results => {
-        this.searchedCategories = results;
+        if(this.input) this.searchedCategories = results;
         if(results.length > 0) this.activeList = this.searchedCategories[0].name;
       });
     }
@@ -83,5 +83,10 @@ export class OrderComponent implements OnInit {
 
   public onSelectDateFormFocus() {
     this.selectDateForm.focus();
+  }
+
+  public removeInput() {
+    this.input = undefined;
+    this.searchedCategories = [];
   }
 }
