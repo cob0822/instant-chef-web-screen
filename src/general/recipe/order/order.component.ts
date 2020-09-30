@@ -25,6 +25,7 @@ export class OrderComponent implements OnInit {
   _selectedInputs: string[] = [];
   _activeList: string;
   searchedCategories: {id: number, name: string}[] = [];
+  _isSearching: boolean = false;
 
   get selectedInputs(): string[] {
     return this._selectedInputs;
@@ -47,6 +48,14 @@ export class OrderComponent implements OnInit {
     this._activeList = result;
   }
 
+  get isSearching() {
+    return this._isSearching;
+  }
+
+  set isSearching(state: boolean) {
+    this._isSearching = state;
+  }
+
   constructor(private router: Router,
               readonly page: PageService,
               readonly addGenre: AddGenreDialogService,
@@ -57,11 +66,13 @@ export class OrderComponent implements OnInit {
   }
 
   public onSearchCategory() {
+    this.isSearching = true;
     this.searchedCategories = [];
     if(this.input && this.input.trim()) {
       this.apiOrder.searchCategory(this.input).subscribe(results => {
-        if(this.input) this.searchedCategories = results;
+        this.searchedCategories = results;
         if(results.length > 0) this.activeList = this.searchedCategories[0].name;
+        this.isSearching = false;
       });
     }
   }

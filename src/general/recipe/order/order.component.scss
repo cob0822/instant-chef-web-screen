@@ -6,6 +6,10 @@
     height: 100%;
 }
 
+.spinner-container {
+    padding: 72px;
+}
+
 .header {
     padding: 40px 0;
     position: sticky;
@@ -210,6 +214,11 @@
             &__buttons {
                 justify-content: flex-end;
                 display: flex;
+            }
+
+            &__no-results {
+                padding: 88px 0;
+                text-align: center;
             }
         }
         

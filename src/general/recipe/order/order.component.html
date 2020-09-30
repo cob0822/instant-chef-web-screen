@@ -37,15 +37,21 @@
                         </div>
                         <div class='required-info__form--inner'>
                             <input #form type='text' [(ngModel)]='input' (ngModelChange)='onSearchCategory()'
-                                dirPopUpTrigger [target]='resultPopup' [isVisible]='searchedCategories.length > 0' [inputtable]='true' [width]='200' 
+                                dirPopUpTrigger [target]='resultPopup' [input]='input' [inputtable]='true' [width]='200' 
                                 (focus)='isFocus = true' (blur)='isFocus = false' />
                             <ui-pop-up #resultPopup [inputtable]='true'>
-                                <ui-list>
+                                <ui-list *ngIf='!isSearching && searchedCategories.length > 0'>
                                     <a class='result-list' [class.active]='activeList == searchedCategory.name' 
                                         *ngFor='let searchedCategory of searchedCategories' (click)='addTag(searchedCategory)' (mouseenter)='activeList = searchedCategory.name'>
                                         {{searchedCategory.name}}
                                     </a>
                                 </ui-list>
+                                <div class='required-info__no-results' *ngIf='!isSearching && searchedCategories.length == 0'>
+                                    <span>検索結果なし</span>
+                                </div>
+                                <div class='spinner-container' *ngIf='isSearching'>
+                                    <ui-spinner [size]='"small"'></ui-spinner>
+                                </div>
                             </ui-pop-up>
                         </div>
                         <mat-icon *ngIf='input' class='required-info__form--clearIcon' (click)='removeInput()'>backspace</mat-icon>
