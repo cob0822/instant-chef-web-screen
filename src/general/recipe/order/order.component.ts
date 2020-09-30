@@ -19,7 +19,6 @@ export class OrderComponent implements OnInit {
 
   PageTypeEnum = PageType;
   input: string;
-  isTagVisible: boolean = false;
   isFocus: boolean = false;
   isShow: boolean = false;
   selectedDateType: string = 'detail';
@@ -68,7 +67,6 @@ export class OrderComponent implements OnInit {
   }
   
   public addTag(searchedCategory: {id: number, name: string}) {
-    this.isTagVisible = true;
     this.input = undefined;
     if(!this.selectedInputs.includes(searchedCategory.name)) this.selectedInputs.push(searchedCategory.name);
   }
