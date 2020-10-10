@@ -68,7 +68,7 @@
     </ul>
     <mat-divider></mat-divider>
     <ul class='menu'>
-        <a *ngIf='!isLogined' [class.active]='page.isActive(PageTypeEnum.Login, url, true)' [routerLink]="'/users/login'"><mat-icon>login</mat-icon>ログイン</a>
+        <a *ngIf='!isLogined' [class.active]='page.isActive(PageTypeEnum.Login, url, true)' [routerLink]="'/login'"><mat-icon>login</mat-icon>ログイン</a>
         <a *ngIf='isLogined' (click)='auth.logout()' [routerLink]="'/'"><mat-icon>reply</mat-icon>ログアウト</a>
     </ul>
 

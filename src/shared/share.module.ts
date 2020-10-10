@@ -41,7 +41,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDividerModule,
     MatSidenavModule,
     MatRadioModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   exports: [
     UiModule,
@@ -62,7 +62,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDividerModule,
     MatSidenavModule,
     MatRadioModule,
-    MatMenuModule
+    MatMenuModule,
   ],
 })
 export class ShareModule { }

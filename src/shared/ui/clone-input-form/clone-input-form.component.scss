@@ -1,0 +1,60 @@
+@import '../../../scss/color.scss';
+@import '../../../scss/font-size.scss';
+
+.container {
+    width: 100%;
+
+    &__form {
+        input {
+            height: 50px;
+            width: 85%;
+        }
+
+        input[type="text"]:focus {
+            border: 2px solid $deep-orange;
+            outline: 0;
+        }
+    
+        &--add-button {
+            color: $orange;
+
+            mat-icon {
+                font-size: 35px;
+            }
+        }
+
+        .disabled {
+            color: $gray !important;
+            opacity: 0.5;
+        }
+    }
+
+    &__clone-container {
+        margin-bottom: 30px;
+        align-items: center;
+
+        &--inner {
+            margin-bottom: 30px;
+            align-items: center;
+            
+            input {
+                height: 50px;
+                width: 85%;
+            }
+    
+            input[type="text"]:focus {
+                border: 2px solid $deep-orange;
+                outline: 0;
+            }
+        
+        }
+
+        &--remove-button {
+            color: $deep-red;
+
+            mat-icon {
+                font-size: 35px;
+            }
+        }
+    }
+}

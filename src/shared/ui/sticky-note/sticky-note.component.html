@@ -1,5 +1,7 @@
 <div class='container mat-elevation-z3' dirStickyNote [size]='size' [width]='width'>
     <mat-icon dirStickyNote [size]='size' [target]='"right-icon"' [class.hidden]='!rightIcon'>{{rightIcon}}</mat-icon>
     <ng-content select='.stickyNote'></ng-content>
+    <span class='required' *ngIf='isRequired'>※必須</span>
+    <span class='optional' *ngIf='isOptional'>※任意</span>
     <mat-icon dirStickyNote [size]='size' [target]='"left-icon"' [class.hidden]='!leftIcon' (mouseenter)='action.emit(true)' (mouseleave)='action.emit(false)'>{{leftIcon}}</mat-icon>
 </div>

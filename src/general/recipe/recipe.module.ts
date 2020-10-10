@@ -12,7 +12,7 @@ import { JPDateAdapter } from '../../shared/other/jp-dateadapter';
 @NgModule({
   declarations: [
     IndexComponent, 
-    OrderComponent
+    OrderComponent,
   ],
   imports: [
     RecipeRoutingModule,

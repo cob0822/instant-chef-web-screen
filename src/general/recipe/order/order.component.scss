@@ -6,10 +6,6 @@
     height: 100%;
 }
 
-.spinner-container {
-    padding: 72px;
-}
-
 .header {
     padding: 40px 0;
     position: sticky;
@@ -36,11 +32,43 @@
     }
 }
 
+.error {
+    color: $deep-red;
+}
+
 .main {
     background-color: white;
     border-right: 3px solid $light-gray;
     border-left: 3px solid $light-gray;
     border-bottom: 3px solid $light-gray;
+
+    .nextButton {
+        height: 50px;
+        width: 250px;
+        color: white;
+        font-size: $medium;
+        background-color: $deep-orange;
+    
+        mat-icon {
+            line-height: calc($medium + 10px);
+            margin-left: 10px;
+        }
+    }
+    
+    .previousButton {
+        height: 50px;
+        width: 250px;
+        color: white;
+        font-size: $medium;
+        margin-right: 10px;
+        border: 2px solid $orange;
+        color: $orange;
+    
+        mat-icon {
+            line-height: calc($medium + 10px);
+            margin-right: 10px;
+        }
+    }
 
     mat-horizontal-stepper {
         ::ng-deep {
@@ -76,204 +104,299 @@
                 padding: 60px 40px;
             }
         }
+    }
 
-        .explain-image {
-            width: 100%;
-            height: 400px;
-            object-fit: contain;
+    .explain-image {
+        width: 100%;
+        height: 400px;
+        object-fit: contain;
+    }
+
+    .notEditable {
+        ::ng-deep {
+            .mat-step-header {
+                .mat-step-icon-state-edit {
+                    background-color: rgba(0, 0, 0, 0.54) !important;
+                    color: white !important;
+                }
+            }
         }
-        
-        .required-info {
-            &__content {
-                padding-bottom: 50px;
-                position: relative;
+    }
 
-                &:not(:first-child) {
-                    padding-top: 50px;
-                }
+    .required-info {
+        &__content {
+            padding-bottom: 50px;
+            position: relative;
+
+            &:not(:first-child) {
+                padding-top: 50px;
+            }
+        }
+
+        &__title {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+
+            &--required {
+                color: $deep-red;
+                margin-left: 20px;
             }
 
-            &__title {
-                margin-bottom: 30px;
+            &--button {
                 display: flex;
-                justify-content: space-between;
-
-                &--button {
-                    display: flex;
-                    align-self: center;
-                    color: $brown;
-                    background-color: white;
-                    border: 2px solid $brown;
-                    
-                    mat-icon {
-                        line-height: $medium;
-                        margin-right: 10px;
-                        margin-top: 3px;
-                    }
-                }
-            }
-
-            &__selector {
-                display: flex;
-                flex-direction: column;
-                width: fit-content;
-
-                &--radio-button {
-                    margin-bottom: 30px;
-
-                    mat-radio-button:nth-child(2) {
-                        margin-left: 30px;
-                    }
-                }
-
-                &--detail-input {
-                    padding: 0 20px;
-                    display: none;
-                }
-
-                .visible {
-                    display: block;
-                }
-            }
-
-            &__form {
-                border: 1px solid $gray;
-                border-radius: 5px;
-                height: 50px;
-                padding: 1px  5px;
-                display: flex;
-                align-items: center;
-
-                &.focus {
-                    border: 2px solid $deep-orange;
-                }
-
-                &--tag {
-                    border: 1px solid $orange;
-                    background-color: $orange;
-                    border-radius: 15px;
-                    color: white;
-                    margin-right: 5px;
-                    padding: 2px 10px;
-                    font-size: 20px;
-                    display: flex;
-                    cursor: default;
-
-                    mat-icon {
-                        font-size: 20px;
-                        margin-right: 3px;
-                        cursor: pointer;
-                        margin-top: 5px;
-                    }
-
-                    &:hover {
-                        opacity: 0.6;
-                    }
-                }
+                align-self: center;
+                color: $brown;
+                background-color: white;
+                border: 2px solid $brown;
                 
-                &--searchIcon {
-                    margin: 5px;
+                mat-icon {
+                    line-height: $medium;
+                    margin-right: 10px;
+                    margin-top: 3px;
                 }
+            }
+        }
 
-                &--clearIcon {
-                    margin: 0 15px;
-                    cursor: pointer;
-                    position: absolute;
-                    right: 0;
-                }
+        &__form {
+            width: 100%;
 
-                &--inner {
-                    width: auto;
-                    height: 95%;
+            textarea {
+                height: 150px;
+            }
+        }
 
-                    input {
-                        width: 100%;
-                        height: 100%;
-                        border: none;
-                    }
+        &__selector {
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
 
-                    input[type="text"]:focus {
-                        border: none;
-                        outline: 0;
-                    }
+            &--radio-button {
+                margin-bottom: 30px;
 
-                    .result-list {
-                        text-align: left;
-                        cursor: pointer;
-                        font-size: $small;
-                        padding: 15px 20px;
-
-                        &.active {
-                            background-color: $deep-white;
-                            text-decoration: underline;
-                        }
-                    }
+                mat-radio-button:nth-child(2) {
+                    margin-left: 30px;
                 }
             }
 
-            &__buttons {
-                justify-content: flex-end;
+            &--detail-input {
+                padding: 0 20px;
+                display: none;
+            }
+
+            .visible {
+                display: block;
+            }
+        }
+
+        &__radio-group {
+            display: flex;
+            flex-direction: column;
+
+            mat-radio-button:not(:first-child) {
+                margin-top: 30px;
+            }
+        }
+
+        &__buttons {
+            justify-content: flex-end;
+            display: flex;
+
+            .disabled {
+                background-color: $gray;
+                opacity: 0.5;
+            }
+        }
+    }
+
+        
+        
+    .optional-info {
+        &__content {
+            padding-bottom: 50px;
+            position: relative;
+
+            &:not(:first-child) {
+                padding-top: 50px;
+            }
+        }
+
+        &__title {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+
+            &--button {
                 display: flex;
+                align-self: center;
+                color: $brown;
+                background-color: white;
+                border: 2px solid $brown;
+                
+                mat-icon {
+                    line-height: $medium;
+                    margin-right: 10px;
+                    margin-top: 3px;
+                }
+            }
+        }
+
+        &__form {
+            border: 1px solid $gray;
+            border-radius: 5px;
+            height: 50px;
+            padding: 1px  5px;
+            display: flex;
+            align-items: center;
+
+            &.focus {
+                border: 2px solid $deep-orange;
             }
 
-            &__no-results {
-                padding: 88px 0;
+            &--tag {
+                border: 1px solid $orange;
+                background-color: $orange;
+                border-radius: 15px;
+                color: white;
+                margin-right: 5px;
+                padding: 2px 10px;
+                font-size: 20px;
+                display: flex;
+                cursor: default;
+
+                mat-icon {
+                    font-size: 20px;
+                    margin-right: 3px;
+                    cursor: pointer;
+                    margin-top: 5px;
+                }
+
+                &:hover {
+                    opacity: 0.6;
+                }
+            }
+            
+            &--searchIcon {
+                margin: 5px;
+            }
+
+            &--clearIcon {
+                margin: 0 15px;
+                cursor: pointer;
+                position: absolute;
+                right: 0;
+            }
+
+            &--inner {
+                width: auto;
+                height: 95%;
+
+                input {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                }
+
+                input[type="text"]:focus {
+                    border: none;
+                    outline: 0;
+                }
+
+                .result-list {
+                    text-align: left;
+                    cursor: pointer;
+                    font-size: $small;
+                    padding: 15px 20px;
+
+                    &.active {
+                        background-color: $deep-white;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        &__number-form {
+            &--inner {
                 text-align: center;
             }
         }
-        
-        .optional-info {
-            &__buttons {
-                justify-content: space-between;
-                display: flex;
+
+        &__clone-container {
+            mat-icon {
+                font-size: 35px;
+            }
+
+            &--remove-button {
+                color: $deep-red;
+            }
+
+            &--inner {
+                margin-bottom: 30px;
+                align-items: center;
+
+                input {
+                    height: 50px;
+                    width: 85%;
+                }
+
+                input[type="text"]:focus {
+                    border: 2px solid $deep-orange;
+                    outline: 0;
+                }
             }
         }
 
-        .layout-confirmation {
-            &__buttons {
-                justify-content: space-between;
-                display: flex;
-            }
+        
+
+        &__no-results {
+            padding: 88px 0;
+            text-align: center;
         }
 
-        .confirmation {
-            &__buttons {
-                justify-content: space-between;
-                display: flex;
-            }
+        &__spinner-container {
+            padding: 72px;
         }
-        
-        .nextButton {
-            height: 50px;
-            width: 250px;
+
+        &__buttons {
+            justify-content: space-between;
+            display: flex;
+        }
+    }
+
+    table {
+        border: 1px solid black;
+        width: 100%;
+        margin-bottom: 50px;
+
+        th {
             color: white;
-            font-size: $medium;
-        
-            mat-icon {
-                line-height: calc($medium + 10px);
-            }
-
-            background-color: $deep-orange;
-            mat-icon {
-                margin-left: 10px;
-            }
+            background-color: $orange;
+            padding: 10px;
         }
-        
-        .previousButton {
-            height: 50px;
-            width: 250px;
-            color: white;
-            font-size: $medium;
-        
-            mat-icon {
-                line-height: calc($medium + 10px);
-            }
 
-            margin-right: 10px;
-            border: 2px solid $orange;
-            color: $orange;
-            mat-icon {
-                margin-right: 10px;
+        td {
+            padding: 10px;
+        }
+    }
+    
+
+    .confirmation {
+        &__buttons {
+            justify-content: space-between;
+            display: flex;
+
+            &--submitButton {
+                height: 50px;
+                width: 250px;
+                color: white;
+                font-size: $medium;
+                background-color: $deep-orange;
+            
+                mat-icon {
+                    line-height: calc($medium + 10px);
+                    margin-right: 10px;
+                }
             }
         }
     }

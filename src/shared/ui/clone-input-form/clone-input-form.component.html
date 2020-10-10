@@ -1,0 +1,20 @@
+<div class='container'>
+    <div class='container__clone-container'>
+        <div #cloneContainer></div>
+    </div>
+    <div class='container__form'>
+        <input type='text' [(ngModel)]='inputValue' (ngModelChange)='changeFormValues()'>
+        <button class='container__form--add-button' mat-icon-button [disabled]='!inputValue'>
+            <mat-icon [class.disabled]='!inputValue' (click)='cloneTemplate()'>add_circle</mat-icon>
+        </button>
+    </div>
+</div>
+
+<ng-template #template let-formValue='$implicit'>
+    <div class='container__clone-container--inner' [id]='"container_" + formValue.id'>
+        <input [id]='"input_" + formValue.id' type='text' [(ngModel)]='formValue.value' (ngModelChange)='changeFormValues(formValue.id, formValue.value)'>
+        <button class='container__clone-container--remove-button' mat-icon-button (click)='removeTemplate(formValue.id)'>
+            <mat-icon>remove_circle</mat-icon>
+        </button>
+    </div>
+</ng-template>

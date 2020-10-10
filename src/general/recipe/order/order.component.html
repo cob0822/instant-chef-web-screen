@@ -9,33 +9,119 @@
         </button>
     </header>
     <main class='main'>
-        <mat-horizontal-stepper>
-            <mat-step class='required-info'>
+        <mat-horizontal-stepper [class.notEditable]='requiredData.invalid' linear>
+            <mat-step [stepControl]='requiredData' class='required-info'>
                 <ng-template matStepLabel>必須情報</ng-template>
+                <form [formGroup]='requiredData'>
 
-                <section class='required-info__content'>
-                    <div class='required-info__title'>
-                        <ui-sticky-note [size]='"medium"' [left-icon]='"help"' (action)='isShow = $event'
+                    <section class='required-info__content'>
+                        <div class='required-info__title'>
+                            <ui-sticky-note [size]='"medium"' [isRequired]='true'>
+                                <span class='stickyNote'>料理名</span>
+                            </ui-sticky-note>
+                        </div>
+                        <mat-form-field class='required-info__form' appearance="outline" color='warn'>
+                            <input matInput type='text' formControlName='title'/>
+                            <mat-error *ngIf='title.invalid'>
+                                <div class='error'>{{getErrorMessage(title)}}</div>
+                            </mat-error>
+                        </mat-form-field>
+                    </section>
+
+                    <mat-divider></mat-divider>
+
+                    <section class='required-info__content'>
+                        <div class='required-info__title'>
+                            <ui-sticky-note [size]='"medium"' [isRequired]='true'>
+                                <span class='stickyNote'>注文内容の詳細説明</span>
+                            </ui-sticky-note>
+                        </div>
+                        <mat-form-field class='required-info__form' appearance="outline" color='warn'>
+                            <textarea matInput type='textarea' formControlName='description'></textarea>
+                            <mat-error *ngIf='description.invalid'>
+                                <div class='error'>{{getErrorMessage(description)}}</div>
+                            </mat-error>
+                        </mat-form-field>
+                    </section>
+
+                    <mat-divider></mat-divider>
+
+                    <section class='required-info__content'>
+                        <div class='required-info__title'>
+                            <ui-sticky-note [size]='"medium"' [isRequired]='true'>
+                                <span class='stickyNote'>希望日</span>
+                            </ui-sticky-note>
+                        </div>
+                        
+                        <div class='required-info__selector'>
+                            <mat-radio-group class='required-info__selector--radio-button' formControlName='dateType'>
+                                <mat-radio-button [value]='OrderDateTypeEnum.Detail'>{{_getOrderDateTypeLabel(OrderDateTypeEnum.Detail)}}</mat-radio-button>
+                                <mat-radio-button [value]='OrderDateTypeEnum.Always'>{{_getOrderDateTypeLabel(OrderDateTypeEnum.Always)}}</mat-radio-button>
+                            </mat-radio-group>
+
+                            <mat-form-field class='required-info__selector--detail-input' [class.visible]='dateType.value == OrderDateTypeEnum.Detail' appearance="fill" color='warn'>
+                                <mat-label>日付の指定</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName='date'>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker touchUi #picker></mat-datepicker>
+                                <mat-error *ngIf='date.invalid'>
+                                    <div class='error'>{{getErrorMessage(date)}}</div>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </section>
+
+                    <mat-divider></mat-divider>
+
+                    <section class='required-info__content'>
+                        <div class='required-info__title'>
+                            <ui-sticky-note [size]='"medium"' [isRequired]='true'>
+                                <span class='stickyNote'>料理の頻度</span>
+                            </ui-sticky-note>
+                        </div>
+                        <mat-radio-group class='required-info__radio-group' formControlName='frequency'>
+                            <mat-radio-button [value]='OrderFrequencyTypeEnum.AlwaysAtWork'>{{_getOrderFrequencyTypeLabel(OrderFrequencyTypeEnum.AlwaysAtWork)}}</mat-radio-button>
+                            <mat-radio-button [value]='OrderFrequencyTypeEnum.AlwaysForHouseWork'>{{_getOrderFrequencyTypeLabel(OrderFrequencyTypeEnum.AlwaysForHouseWork)}}</mat-radio-button>
+                            <mat-radio-button [value]='OrderFrequencyTypeEnum.AlwaysAsHobby'>{{_getOrderFrequencyTypeLabel(OrderFrequencyTypeEnum.AlwaysAsHobby)}}</mat-radio-button>
+                            <mat-radio-button [value]='OrderFrequencyTypeEnum.Sometimes'>{{_getOrderFrequencyTypeLabel(OrderFrequencyTypeEnum.Sometimes)}}</mat-radio-button>
+                            <mat-radio-button [value]='OrderFrequencyTypeEnum.NotAtAll'>{{_getOrderFrequencyTypeLabel(OrderFrequencyTypeEnum.NotAtAll)}}</mat-radio-button>
+                            <mat-radio-button [value]='OrderFrequencyTypeEnum.InputByMyself'>{{_getOrderFrequencyTypeLabel(OrderFrequencyTypeEnum.InputByMyself)}}</mat-radio-button>
+                        </mat-radio-group>
+                    </section>
+
+                    <section class='required-info__buttons'>
+                        <button class='nextButton' [class.disabled]='requiredData.invalid' mat-raised-button matStepperNext [disabled]='requiredData.invalid'>
+                            <span>任意情報へ進む</span><mat-icon>arrow_forward</mat-icon>
+                        </button>
+                    </section>
+                </form>
+            </mat-step>
+
+            <mat-step class='optional-info'>
+                <ng-template matStepLabel>任意情報</ng-template>
+                <section class='optional-info__content'>
+                    <div class='optional-info__title'>
+                        <ui-sticky-note [size]='"medium"' [left-icon]='"help"' (action)='isShow = $event' [isOptional]='true'
                             dirPopUpTrigger [target]='explainPopup' [isOutputAction]='isShow'>
                             <span class='stickyNote'>カテゴリー</span>
                         </ui-sticky-note>
-                        <button class='required-info__title--button' mat-flat-button (click)='addGenre.openDialog()'>
+                        <button class='optional-info__title--button' mat-flat-button (click)='addGenre.openDialog()'>
                             <mat-icon>add_circle</mat-icon>
                             <span>カテゴリーの追加希望</span>
                         </button>
                     </div>
 
                     <ui-pop-up #explainPopup>
-                        <img class='explain-image' src='../../../assets/images/explain.gif' />
+                        <!-- <img class='explain-image' src='../../../assets/images/explain.gif' /> -->
                     </ui-pop-up>
                     
-                    <div class='required-info__form' [class.focus]='isFocus' (click)='onFormFocus()'>
-                        <mat-icon class='required-info__form--searchIcon'>search</mat-icon>
-                        <div *ngFor='let selectInput of selectedInputs' class='required-info__form--tag mat-elevation-z2'>
-                            <mat-icon (click)='removeTag(selectInput)'>remove_circle</mat-icon>
-                            <div>{{selectInput}}</div>
+                    <div class='optional-info__form' [class.focus]='isFocus' (click)='onFormFocus()'>
+                        <mat-icon class='optional-info__form--searchIcon'>search</mat-icon>
+                        <div *ngFor='let selectedCategory of selectedCategories' class='optional-info__form--tag mat-elevation-z2'>
+                            <mat-icon (click)='removeTag(selectedCategory)'>remove_circle</mat-icon>
+                            <div>{{selectedCategory}}</div>
                         </div>
-                        <div class='required-info__form--inner'>
+                        <div class='optional-info__form--inner'>
                             <input #form type='text' [(ngModel)]='input' (ngModelChange)='onSearchCategory()'
                                 dirPopUpTrigger [target]='resultPopup' [input]='input' [inputtable]='true' [width]='200' 
                                 (focus)='isFocus = true' (blur)='isFocus = false' />
@@ -46,88 +132,121 @@
                                         {{searchedCategory.name}}
                                     </a>
                                 </ui-list>
-                                <div class='required-info__no-results' *ngIf='!isSearching && searchedCategories.length == 0'>
+                                <div class='optional-info__no-results' *ngIf='!isSearching && searchedCategories.length == 0'>
                                     <span>検索結果なし</span>
                                 </div>
-                                <div class='spinner-container' *ngIf='isSearching'>
+                                <div class='optional-info__spinner-container' *ngIf='isSearching'>
                                     <ui-spinner [size]='"small"'></ui-spinner>
                                 </div>
                             </ui-pop-up>
                         </div>
-                        <mat-icon *ngIf='input' class='required-info__form--clearIcon' (click)='removeInput()'>backspace</mat-icon>
+                        <mat-icon *ngIf='input' class='optional-info__form--clearIcon' (click)='removeInput()'>backspace</mat-icon>
                     </div>
                 </section>
 
                 <mat-divider></mat-divider>
 
-                <section class='required-info__content'>
-                    <div class='required-info__title'>
-                        <ui-sticky-note [size]='"medium"'>
-                            <span class='stickyNote'>希望日</span>
+                <section class='optional-info__content'>
+                    <div class='optional-info__title'>
+                        <ui-sticky-note [size]='"medium"' [isOptional]='true'>
+                            <span class='stickyNote'>希望の作成時間</span>
                         </ui-sticky-note>
                     </div>
-                    <div class='required-info__selector'>
-                        <mat-radio-group class='required-info__selector--radio-button' [(ngModel)]='selectedDateType'>
-                            <mat-radio-button [value]='"detail"'>日付を指定する</mat-radio-button>
-                            <mat-radio-button [value]='"always"'>いつでも良い</mat-radio-button>
-                        </mat-radio-group>
 
-                        <mat-form-field class='required-info__selector--detail-input' appearance="fill" [class.visible]='selectedDateType == "detail"'>
-                            <mat-label>日付の指定</mat-label>
-                            <input #selectDateForm='matInput' matInput [matDatepicker]="picker">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker touchUi #picker></mat-datepicker>
+                    <div class='optional-info__number-form'>
+                        <mat-form-field appearance="outline" color='warn'>
+                            <input class='optional-info__number-form--inner' matInput type="number" step="5" min="10" 
+                                [(ngModel)]='creationTime' (change)='convertCreationTimeToInteger()'>
+                            <mat-icon matPrefix>alarm</mat-icon>
+                            <span matSuffix>分以内</span>
                         </mat-form-field>
                     </div>
                 </section>
 
                 <mat-divider></mat-divider>
 
-                <section class='required-info__content'>
-                    <div class='required-info__title'>
-                        <ui-sticky-note [size]='"medium"'>
-                            <span class='stickyNote'>料理の腕前</span>
+                <section class='optional-info__content'>
+                    <div class='optional-info__title'>
+                        <ui-sticky-note [size]='"medium"' [isOptional]='true'>
+                            <span class='stickyNote'>持っている料理道具</span>
                         </ui-sticky-note>
                     </div>
+                    <ui-clone-input-form [formValues]='toolFormValues' (formValues)='toolFormValues = $event'></ui-clone-input-form>
                 </section>
 
-                <section class='required-info__buttons'>
-                    <button class='nextButton' mat-raised-button matStepperNext>
-                        <span>任意情報へ進む</span><mat-icon>arrow_forward</mat-icon>
-                    </button>
+                <mat-divider></mat-divider>
+
+                <section class='optional-info__content'>
+                    <div class='optional-info__title'>
+                        <ui-sticky-note [size]='"medium"' [isOptional]='true'>
+                            <span class='stickyNote'>希望する材料</span>
+                        </ui-sticky-note>
+                    </div>
+                    <ui-clone-input-form [formValues]='ingredientsFormValues' (formValues)='ingredientsFormValues = $event'></ui-clone-input-form>
                 </section>
 
-            </mat-step>
-            <mat-step class='optional-info'>
-                <ng-template matStepLabel>任意情報</ng-template>
-                <span>content ２</span>
-                <div class='optional-info__buttons'>
+                <section class='optional-info__buttons'>
                     <button class='previousButton' mat-flat-button matStepperPrevious>
                         <mat-icon>keyboard_return</mat-icon><span>基本情報へ戻る</span>
                     </button>
                     <button class='nextButton' mat-raised-button matStepperNext>
-                        <span>レイアウトへ進む</span><mat-icon>arrow_forward</mat-icon>
+                        <span>確認画面へ進む</span><mat-icon>arrow_forward</mat-icon>
                     </button>
-                </div>
+                </section>
+                
             </mat-step>
-            <mat-step class='layout-confirmation'>
-                <ng-template matStepLabel>レイアウト</ng-template>
-                <span>content ３</span>
-                <div class='layout-confirmation__buttons'>
+
+            <mat-step class='confirmation'>
+                <ng-template matStepLabel>確認画面</ng-template>
+                <table rules='all'>
+                    <th>入力タイトル</th>
+                    <th>入力内容</th>
+                    <tr>
+                        <td>料理名</td>
+                        <td>{{title.value}}</td>
+                    </tr>
+                    <tr>
+                        <td>注文内容の詳細説明</td>
+                        <td>{{description.value}}</td>
+                    </tr>
+                    <tr>
+                        <td>希望日</td>
+                        <td *ngIf='dateType.value == OrderDateTypeEnum.Detail'>{{date.value | date: 'yyyy/MM/dd'}}</td>
+                        <td *ngIf='dateType.value == OrderDateTypeEnum.Always'>{{_getOrderDateTypeLabel(OrderDateTypeEnum.Always)}}</td>
+                    </tr>
+                    <tr>
+                        <td>料理の頻度</td>
+                        <td>{{_getOrderFrequencyTypeLabel(frequency.value)}}</td>
+                    </tr>
+                    <tr *ngIf='selectedCategories.length > 0'>
+                        <td>カテゴリー</td>
+                        <td>
+                            <span *ngFor='let selectedCategory of selectedCategories'>{{selectedCategory}}&emsp;</span>
+                        </td>
+                    </tr>
+                    <tr *ngIf='creationTime'>
+                        <td>希望の作成時間</td>
+                        <td>{{creationTime}}&ensp;分以内</td>
+                    </tr>
+                    <tr *ngIf='toolFormValues.length > 0'>
+                        <td>持っている料理道具</td>
+                        <td>
+                            <span *ngFor='let toolFormValue of toolFormValues'>{{toolFormValue.value}}&emsp;</span>
+                        </td>
+                    </tr>
+                    <tr *ngIf='ingredientsFormValues.length > 0'>
+                        <td>希望する材料</td>
+                        <td>
+                            <span *ngFor='let ingredientsFormValue of ingredientsFormValues'>{{ingredientsFormValue.value}}&emsp;</span>
+                        </td>
+                    </tr>
+                </table>
+                <div class='confirmation__buttons'>
                     <button class='previousButton' mat-flat-button matStepperPrevious>
                         <mat-icon>keyboard_return</mat-icon><span>任意情報へ戻る</span>
                     </button>
-                    <button class='nextButton' mat-raised-button matStepperNext>
-                        <span>確認画面へ進む</span><mat-icon>arrow_forward</mat-icon>
-                    </button>
-                </div>
-            </mat-step>
-            <mat-step class='confirmation'>
-                <ng-template matStepLabel>確認画面</ng-template>
-                <span>content ３</span>
-                <div class='confirmation__buttons'>
-                    <button class='previousButton' mat-flat-button matStepperPrevious>
-                        <mat-icon>keyboard_return</mat-icon><span>レイアウトへ戻る</span>
+                    <button class='confirmation__buttons--submitButton' mat-raised-button (click)='onSubmit()'>
+                        <mat-icon>move_to_inbox</mat-icon><span>投稿する</span>
                     </button>
                 </div>
             </mat-step>

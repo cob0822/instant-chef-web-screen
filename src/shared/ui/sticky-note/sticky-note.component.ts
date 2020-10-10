@@ -11,6 +11,8 @@ export class StickyNoteComponent implements OnInit {
   @Input('right-icon') rightIcon?: string;
   @Input('left-icon') leftIcon?: string;
   @Input('width') width?: number;
+  @Input('isRequired') isRequired: boolean = false;
+  @Input('isOptional') isOptional: boolean = false;
   @Output() action = new EventEmitter<boolean>();
 
   constructor() { }
