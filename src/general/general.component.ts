@@ -55,7 +55,6 @@ export class GeneralComponent implements OnInit {
       .pipe(takeUntil(this.onDestroy$))
       .subscribe(status => {
         this.isLogined = status;
-        status? alert('ログインしました') : alert('ログアウトしました');
     });
   }
 

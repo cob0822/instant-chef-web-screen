@@ -5,7 +5,6 @@ import { User } from '../../../shared/model/user';
 import { AccountService } from '../../../shared/api/account.service';
 import { AuthService } from '../../../shared/service/auth.service';
 import { UserService } from '../../../shared/service/user.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',

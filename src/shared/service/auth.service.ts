@@ -4,6 +4,7 @@ import { User } from '../model/user';
 import { WithAccessToken } from '../model/with-access-token';
 import { LocalStorageKey } from '../enum/local-storage-key';
 import { LocalStorageService } from '../service/local-storage.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class AuthService {
 
   public _isLogined = new Subject<boolean>();
 
-  constructor(private localStorage: LocalStorageService) { }
+  constructor(private localStorage: LocalStorageService,
+              private router: Router) { }
 
   get isLogined$(): Observable<boolean> {
     return this._isLogined.asObservable();
@@ -63,6 +65,7 @@ export class AuthService {
   public logout() {
     this.localStorage.removeLocalStorage(LocalStorageKey.AccessToken);
     this.isLogined = false;
+    this.router.navigate(['/']);
   }
   
 }
