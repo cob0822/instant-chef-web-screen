@@ -160,8 +160,11 @@ export class OrderComponent implements OnInit {
       let requestFormValues: string[] = this.getNotUndefinedValueOnFormValues(this.ingredientsFormValues);
       if(requestFormValues.length > 0) Object.assign(orderRequest, {ingredients: requestFormValues});
     }
-
     console.log(orderRequest);
+
+    this.apiOrder.createOrder(orderRequest).subscribe(response => {
+      console.log(response);
+    });
   }
 
   private getNotUndefinedValueOnFormValues(formValues: {id?: number, value?: string}[]): string[] {
