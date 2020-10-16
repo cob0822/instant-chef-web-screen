@@ -9,13 +9,13 @@ export class CloneInputFormComponent implements OnInit {
 
   @ViewChild('cloneContainer', {read:ViewContainerRef}) private cloneContainer: ViewContainerRef;
   @ViewChild('template') private template: TemplateRef<any>;
-  @Input('formValues') public formValues: {id?: number, value: string}[];
-  @Output('formValues') private _formValues: EventEmitter<{id?: number, value: string}[]> = new EventEmitter();
+  @Output('formValues') private _formValues: EventEmitter<string[]> = new EventEmitter();
 
   private _cloneComponents: {id: number, component: EmbeddedViewRef<any>}[] = [];
   private id: number = 0;
 
   public inputValue: string;
+  public formValues: {id?: number, value: string}[] = [];
 
   constructor() { }
 
@@ -42,7 +42,7 @@ export class CloneInputFormComponent implements OnInit {
     this.cloneContainer.remove(this.cloneContainer.indexOf(cloneComponent));
     this.cloneComponents = this.cloneComponents.filter(v => v.id != id);
     this.formValues = this.formValues.filter(v => v.id != id);
-    this._formValues.emit(this.formValues);
+    this._formValues.emit(this.getNotUndefinedValue(this.formValues));
   }
 
   public changeFormValues(id?: number, value?: string) {
@@ -55,6 +55,16 @@ export class CloneInputFormComponent implements OnInit {
         this.formValues.push({id: this.id, value: this.inputValue});
       }
     }
+    this._formValues.emit(this.getNotUndefinedValue(this.formValues));
+  }
+
+  private getNotUndefinedValue(formValues: {id?: number, value?: string}[]): string[] {
+    let requestFormValues: string[] = [];
+
+    formValues.forEach(formValue => {
+      if(formValue.value) requestFormValues.push(formValue.value);
+    });
+    return requestFormValues;
   }
 
 }

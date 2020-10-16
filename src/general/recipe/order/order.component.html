@@ -171,7 +171,7 @@
                             <span class='stickyNote'>持っている料理道具</span>
                         </ui-sticky-note>
                     </div>
-                    <ui-clone-input-form [formValues]='toolFormValues' (formValues)='toolFormValues = $event'></ui-clone-input-form>
+                    <ui-clone-input-form (formValues)='toolFormValues = $event'></ui-clone-input-form>
                 </section>
 
                 <mat-divider></mat-divider>
@@ -182,7 +182,7 @@
                             <span class='stickyNote'>希望する材料</span>
                         </ui-sticky-note>
                     </div>
-                    <ui-clone-input-form [formValues]='ingredientsFormValues' (formValues)='ingredientsFormValues = $event'></ui-clone-input-form>
+                    <ui-clone-input-form (formValues)='ingredientsFormValues = $event'></ui-clone-input-form>
                 </section>
 
                 <section class='optional-info__buttons'>
@@ -231,13 +231,13 @@
                     <tr *ngIf='toolFormValues.length > 0'>
                         <td>持っている料理道具</td>
                         <td>
-                            <span *ngFor='let toolFormValue of toolFormValues'>{{toolFormValue.value}}&emsp;</span>
+                            <span *ngFor='let toolFormValue of toolFormValues'>{{toolFormValue}}&emsp;</span>
                         </td>
                     </tr>
                     <tr *ngIf='ingredientsFormValues.length > 0'>
                         <td>希望する材料</td>
                         <td>
-                            <span *ngFor='let ingredientsFormValue of ingredientsFormValues'>{{ingredientsFormValue.value}}&emsp;</span>
+                            <span *ngFor='let ingredientsFormValue of ingredientsFormValues'>{{ingredientsFormValue}}&emsp;</span>
                         </td>
                     </tr>
                 </table>

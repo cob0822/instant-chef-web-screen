@@ -39,8 +39,8 @@ export class OrderComponent implements OnInit {
   public activeList: string;
   public isSearching: boolean = false;
   
-  private _toolFormValues: {id?: number, value?: string}[] = [];
-  private _ingredientsFormValues: {id?: number, value?: string}[] = [];
+  private _toolFormValues: string[] = [];
+  private _ingredientsFormValues: string[] = [];
 
   constructor(private formBuilder: FormBuilder,
               readonly page: PageService,
@@ -68,19 +68,19 @@ export class OrderComponent implements OnInit {
     return <FormControl>this.requiredData.get('frequency');
   }
 
-  get toolFormValues(): {id?: number, value?: string}[]  {
+  get toolFormValues(): string[] {
     return this._toolFormValues;
   }
 
-  set toolFormValues(formValues: {id?: number, value?: string}[]) {
+  set toolFormValues(formValues: string[]) {
     this._toolFormValues = formValues;
   }
 
-  get ingredientsFormValues(): {id?: number, value?: string}[] {
+  get ingredientsFormValues(): string[] {
     return this._ingredientsFormValues;
   }
 
-  set ingredientsFormValues(formValues: {id?: number, value?: string}[]) {
+  set ingredientsFormValues(formValues: string[]) {
     this._ingredientsFormValues = formValues;
   }
 
@@ -152,28 +152,17 @@ export class OrderComponent implements OnInit {
     if(this.creationTime) Object.assign(orderRequest, {creation_time: this.creationTime});
     
     if(this.toolFormValues.length > 0) {
-      let requestFormValues: string[] = this.getNotUndefinedValueOnFormValues(this.toolFormValues);
-      if(requestFormValues.length > 0) Object.assign(orderRequest, {tool: requestFormValues});
+       Object.assign(orderRequest, {tool: this.toolFormValues});
     }
 
     if(this.ingredientsFormValues.length > 0) {
-      let requestFormValues: string[] = this.getNotUndefinedValueOnFormValues(this.ingredientsFormValues);
-      if(requestFormValues.length > 0) Object.assign(orderRequest, {ingredients: requestFormValues});
+      Object.assign(orderRequest, {ingredients: this.ingredientsFormValues});
     }
     console.log(orderRequest);
 
     this.apiOrder.createOrder(orderRequest).subscribe(response => {
-      console.log(response);
+      console.log(orderRequest);
     });
-  }
-
-  private getNotUndefinedValueOnFormValues(formValues: {id?: number, value?: string}[]): string[] {
-    let requestFormValues: string[] = [];
-
-    formValues.forEach(formValue => {
-      if(formValue.value) requestFormValues.push(formValue.value);
-    });
-    return requestFormValues;
   }
 
   private checkDateIsNullOrRequired(group: FormGroup): void {
