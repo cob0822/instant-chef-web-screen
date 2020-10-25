@@ -6,7 +6,7 @@ export interface OrderRequest {
     description: string;
     date: string | OrderDateType;
     frequency: OrderFrequencyType;
-    categories?: string[];
+    categories?: number[];
     creation_time?: number;
     tool?: string[];
     ingredients?: string[];

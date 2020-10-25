@@ -35,7 +35,7 @@ export class OrderComponent implements OnInit {
   public requiredData: FormGroup;
   public creationTime: number | undefined = undefined;
   
-  public selectedCategories: string[] = [];
+  public selectedCategories: {id: number, name: string}[] = [];
   public activeList: string;
   public isSearching: boolean = false;
   
@@ -114,11 +114,11 @@ export class OrderComponent implements OnInit {
   
   public addTag(searchedCategory: {id: number, name: string}) {
     this.input = undefined;
-    if(!this.selectedCategories.includes(searchedCategory.name)) this.selectedCategories.push(searchedCategory.name);
+    if(!this.selectedCategories.find(v => v.id == searchedCategory.id)) this.selectedCategories.push(searchedCategory);
   }
 
-  public removeTag(selectedCategory: string) {
-    this.selectedCategories = this.selectedCategories.filter(v => { return v !== selectedCategory});
+  public removeTag(selectedCategory: {id: number, name: string}) {
+    this.selectedCategories = this.selectedCategories.filter(v => { return v.id !== selectedCategory.id});
   }
 
   public onFormFocus() {
@@ -145,8 +145,12 @@ export class OrderComponent implements OnInit {
       frequency: this.frequency.value,
     }
   
-    if(this.selectedCategories.length > 0 && !this.selectedCategories.includes(undefined)) {
-      Object.assign(orderRequest, {categories: this.selectedCategories});
+    if(this.selectedCategories.length > 0) {
+      let selectedCategoryIds: number[] = [];
+      this.selectedCategories.forEach(selectedCategory => {
+        selectedCategoryIds.push(selectedCategory.id);
+      });
+      Object.assign(orderRequest, {categories: selectedCategoryIds});
     }
 
     if(this.creationTime) Object.assign(orderRequest, {creation_time: this.creationTime});
@@ -161,7 +165,7 @@ export class OrderComponent implements OnInit {
     console.log(orderRequest);
 
     this.apiOrder.createOrder(orderRequest).subscribe(response => {
-      console.log(orderRequest);
+      console.log(response);
     });
   }
 
