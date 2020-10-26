@@ -221,7 +221,7 @@
                     <tr *ngIf='selectedCategories.length > 0'>
                         <td>カテゴリー</td>
                         <td>
-                            <span *ngFor='let selectedCategory of selectedCategories'>{{selectedCategory}}&emsp;</span>
+                            <span *ngFor='let selectedCategory of selectedCategories'>{{selectedCategory.name}}&emsp;</span>
                         </td>
                     </tr>
                     <tr *ngIf='creationTime'>
