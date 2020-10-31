@@ -145,7 +145,7 @@ export class OrderComponent implements OnInit {
     let orderRequest: OrderRequest = {
       name: this.title.value,
       description: this.description.value,
-      desired_date: this.dateType.value == OrderDateType.Detail? this.datePipe.transform(this.date.value, 'yyyy/MM/dd') : OrderDateType.Always,
+      desired_date: this.dateType.value === OrderDateType.Detail? this.datePipe.transform(this.date.value, 'yyyy/MM/dd') : OrderDateType.Always,
       cooking_frequency: this.frequency.value,
     }
   
