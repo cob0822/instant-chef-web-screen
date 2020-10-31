@@ -84,6 +84,10 @@ export class OrderComponent implements OnInit {
     this._ingredientsFormValues = formValues;
   }
 
+  get today() {
+    return new Date();
+  }
+
   ngOnInit(): void {
     this.requiredData = this.formBuilder.group({
       title: new FormControl(undefined, [Validators.required]),

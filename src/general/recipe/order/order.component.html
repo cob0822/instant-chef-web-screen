@@ -61,7 +61,7 @@
 
                             <mat-form-field class='required-info__selector--detail-input' [class.visible]='dateType.value == OrderDateTypeEnum.Detail' appearance="fill" color='warn'>
                                 <mat-label>日付の指定</mat-label>
-                                <input matInput [matDatepicker]="picker" formControlName='date'>
+                                <input [min]='today' matInput [matDatepicker]="picker" formControlName='date'>
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker touchUi #picker></mat-datepicker>
                                 <mat-error *ngIf='date.invalid'>
