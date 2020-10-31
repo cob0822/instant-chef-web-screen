@@ -143,6 +143,10 @@ export class OrderComponent implements OnInit {
       description: this.description.value,
       date: this.dateType.value == OrderDateType.Detail? this.datePipe.transform(this.date.value, 'yyyy/MM/dd') : OrderDateType.Always,
       frequency: this.frequency.value,
+      categories: null,
+      creation_time: null,
+      tool: null,
+      ingredients: null
     }
   
     if(this.selectedCategories.length > 0) {
@@ -153,7 +157,7 @@ export class OrderComponent implements OnInit {
       Object.assign(orderRequest, {categories: selectedCategoryIds});
     }
 
-    if(this.creationTime) Object.assign(orderRequest, {creation_time: this.creationTime});
+    if(this.creationTime) Object.assign(orderRequest, {creation_time: Number(this.creationTime)});
     
     if(this.toolFormValues.length > 0) {
        Object.assign(orderRequest, {tool: this.toolFormValues});
