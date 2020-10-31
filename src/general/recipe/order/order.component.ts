@@ -143,14 +143,10 @@ export class OrderComponent implements OnInit {
 
   public onSubmit() {
     let orderRequest: OrderRequest = {
-      title: this.title.value,
+      name: this.title.value,
       description: this.description.value,
-      date: this.dateType.value == OrderDateType.Detail? this.datePipe.transform(this.date.value, 'yyyy/MM/dd') : OrderDateType.Always,
-      frequency: this.frequency.value,
-      categories: null,
-      creation_time: null,
-      tool: null,
-      ingredients: null
+      desired_date: this.dateType.value == OrderDateType.Detail? this.datePipe.transform(this.date.value, 'yyyy/MM/dd') : OrderDateType.Always,
+      cooking_frequency: this.frequency.value,
     }
   
     if(this.selectedCategories.length > 0) {

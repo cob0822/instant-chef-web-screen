@@ -2,12 +2,12 @@ import { OrderFrequencyType } from '../enum/order-frequency-type';
 import { OrderDateType } from '../enum/order-date-type';
 
 export interface OrderRequest {
-    title: string;
+    name: string;
     description: string;
-    date: string | OrderDateType;
-    frequency: OrderFrequencyType;
+    desired_date: string | OrderDateType;
+    cooking_frequency: OrderFrequencyType;
     categories?: number[];
-    creation_time?: number;
+    desired_cooking_time?: number;
     tool?: string[];
     ingredients?: string[];
 }
