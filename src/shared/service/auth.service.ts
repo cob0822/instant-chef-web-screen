@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
 import { User } from '../model/user';
 import { ResponseWithAccessToken } from '../model/response-with-access-token';
 import { LocalStorageKey } from '../enum/local-storage-key';
@@ -11,17 +10,17 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  public _isLogined = new Subject<boolean>();
+  public _isLogined: boolean = false;
 
   constructor(private localStorage: LocalStorageService,
               private router: Router) { }
 
-  get isLogined$(): Observable<boolean> {
-    return this._isLogined.asObservable();
+  get isLogined() {
+    return this._isLogined;
   }
 
   set isLogined(status: boolean) {
-    this._isLogined.next(status);
+    this._isLogined = status;
   }
 
   get accessToken(): string | null {

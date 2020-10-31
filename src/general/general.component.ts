@@ -6,7 +6,7 @@ import { PageService } from '../shared/service/page.service';
 import { AuthService } from '../shared/service/auth.service';
 import { UserService } from '../shared/service/user.service';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @Component({
   selector: 'app-general',
@@ -18,13 +18,13 @@ export class GeneralComponent implements OnInit {
   public searchType = SearchType.RecipesList;
   public SearchTypeEnum = SearchType;
   public PageTypeEnum = PageType;
-  private _isLogined: boolean;
   private onDestroy$ = new Subject();
 
   constructor(private router: Router,
               readonly page: PageService,
               readonly auth: AuthService,
               readonly user: UserService ,
+              private bnIdle: BnNgIdleService,
               private changeDetector: ChangeDetectorRef) { }
 
   get url(): string {
@@ -41,20 +41,17 @@ export class GeneralComponent implements OnInit {
   }
 
   get isLogined(): boolean {
-    return this._isLogined;
-  }
-
-  set isLogined(status: boolean) {
-    this._isLogined = status;
+    return this.auth.isLogined;
   }
 
   ngOnInit(): void {
-    this.isLogined = this.auth.checkAccessTokenIsValid();
+    if(this.auth.accessToken) this.auth.isLogined = true;
 
-    this.auth.isLogined$
-      .pipe(takeUntil(this.onDestroy$))
-      .subscribe(status => {
-        this.isLogined = status;
+    this.bnIdle.startWatching(1800).subscribe(res => {
+      if(res && this.isLogined) { 
+        alert('セッションタイムアウトが発生しました。\n再度ログインから実行してください。');
+        this.auth.logout();
+      }
     });
   }
 

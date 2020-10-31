@@ -12,6 +12,7 @@ import { NavComponent } from './nav/nav.component';
 import { AuthService } from '../shared/service/auth.service';
 import { AccountService } from '../shared/api/account.service';
 import { UserService } from '../shared/service/user.service';
+import { BnNgIdleService } from 'bn-ng-idle';
  
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UserService } from '../shared/service/user.service';
     PageService,
     AuthService,
     AccountService,
-    UserService
+    UserService,
+    BnNgIdleService
   ],
   exports: [
     ShareModule,

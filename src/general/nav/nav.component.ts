@@ -27,21 +27,11 @@ export class NavComponent implements OnInit {
   }
 
   get isLogined(): boolean {
-    return this._isLogined;
-  }
-
-  set isLogined(status: boolean) {
-    this._isLogined = status;
+    return this.auth.isLogined;
   }
 
   ngOnInit(): void {
-    this.isLogined = this.auth.checkAccessTokenIsValid();
-
-    this.auth.isLogined$
-    .pipe(takeUntil(this.onDestroy$))
-    .subscribe(status => {
-      this.isLogined = status;
-    }); 
+    if(this.auth.accessToken) this.auth.isLogined = true;
   }
 
   ngOnDestroy() {
