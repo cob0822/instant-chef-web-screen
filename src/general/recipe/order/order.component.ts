@@ -154,17 +154,18 @@ export class OrderComponent implements OnInit {
       this.selectedCategories.forEach(selectedCategory => {
         selectedCategoryIds.push(selectedCategory.id);
       });
-      Object.assign(orderRequest, {categories: selectedCategoryIds});
+
+      orderRequest = {...orderRequest, ...{categories: selectedCategoryIds}};
     }
 
-    if(this.creationTime) Object.assign(orderRequest, {creation_time: Number(this.creationTime)});
+    if(this.creationTime) orderRequest = {...orderRequest, ...{creation_time: Number(this.creationTime)}};
     
     if(this.toolFormValues.length > 0) {
-       Object.assign(orderRequest, {tool: this.toolFormValues});
+      orderRequest = {...orderRequest, ...{tool: this.toolFormValues}};
     }
 
     if(this.ingredientsFormValues.length > 0) {
-      Object.assign(orderRequest, {ingredients: this.ingredientsFormValues});
+      orderRequest = {...orderRequest, ...{ingredients: this.ingredientsFormValues}};
     }
     console.log(orderRequest);
 
