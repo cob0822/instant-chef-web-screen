@@ -63,6 +63,7 @@ export class AuthService {
 
   public logout() {
     this.localStorage.removeLocalStorage(LocalStorageKey.AccessToken);
+    this.localStorage.removeLocalStorage(LocalStorageKey.UserName);
     this.isLogined = false;
     this.router.navigate(['/']);
   }

@@ -8,6 +8,7 @@ import { PageService } from '../../shared/service/page.service';
 import { OrderService as ApiOrderService } from '../../shared/api/order.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { JPDateAdapter } from '../../shared/other/jp-dateadapter';
+import { provideHttpInterceptors } from '../../shared/interceptor/http-interceptors';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { JPDateAdapter } from '../../shared/other/jp-dateadapter';
   providers: [
     PageService,
     ApiOrderService,
+    provideHttpInterceptors(),
     {provide: MAT_DATE_LOCALE, useValue: JPDateAdapter}
   ]
 })

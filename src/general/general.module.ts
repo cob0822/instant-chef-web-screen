@@ -13,6 +13,7 @@ import { AuthService } from '../shared/service/auth.service';
 import { AccountService } from '../shared/api/account.service';
 import { UserService } from '../shared/service/user.service';
 import { BnNgIdleService } from 'bn-ng-idle';
+
  
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { BnNgIdleService } from 'bn-ng-idle';
     AuthService,
     AccountService,
     UserService,
-    BnNgIdleService
+    BnNgIdleService,
   ],
   exports: [
     ShareModule,

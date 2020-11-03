@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/index';
-import { AuthService } from '../service/auth.service'
 import { OrderRequest } from '../model/order-request';
 
 @Injectable({
@@ -9,8 +8,7 @@ import { OrderRequest } from '../model/order-request';
 })
 export class OrderService {
 
-  constructor(protected http: HttpClient,
-              private auth: AuthService) { }
+  constructor(protected http: HttpClient) { }
 
   public searchCategory(keyword: string): Observable<{id: number, name: string}[]> {
     return this.http.get<{id: number, name: string}[]>('/api/orders/categories', {params: new HttpParams().set('keyword', keyword)});
