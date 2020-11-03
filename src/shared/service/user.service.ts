@@ -23,4 +23,8 @@ export class UserService {
     this.userName = info.user.name!;
   }
 
+  public removeUserName() {
+    this.localStorage.removeLocalStorage(LocalStorageKey.UserName);
+  }
+
 }
