@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -12,7 +12,11 @@ export class AuthorizationResponseInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       tap(resp => {
-        if(resp['body']) console.log(resp)
+        if (resp instanceof HttpResponse) {
+          console.log(resp)
+        }
+      }, error => {
+        console.log(error);
       })
     )
   }
