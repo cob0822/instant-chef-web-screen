@@ -13,6 +13,8 @@ import { AuthService } from '../shared/service/auth.service';
 import { AccountService } from '../shared/api/account.service';
 import { UserService } from '../shared/service/user.service';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthorizationResponseInterceptor } from '../shared/interceptor/authorization-response-interceptor';
 
  
 @NgModule({
@@ -35,6 +37,7 @@ import { BnNgIdleService } from 'bn-ng-idle';
     AccountService,
     UserService,
     BnNgIdleService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizationResponseInterceptor, multi: true },
   ],
   exports: [
     ShareModule,
