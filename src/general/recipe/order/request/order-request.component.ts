@@ -1,22 +1,22 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { PageService } from '../../../shared/service/page.service';
-import { PageType } from '../../../shared/enum/page-type';
-import { AddGenreDialogService } from '../../../shared/dialog/add-genre-dialog/add-genre-dialog.service';
-import { OrderService as ApiOrderService } from '../../../shared/api/order.service';
-import { OrderFrequencyType, getOrderFrequencyTypeLabel } from '../../../shared/enum/order-frequency-type';
-import { OrderDateType, getOrderDateTypeLabel} from '../../../shared/enum/order-date-type';
-import { OrderRequest } from '../../../shared/model/order-request';
+import { PageService } from '../../../../shared/service/page.service';
+import { PageType } from '../../../../shared/enum/page-type';
+import { AddGenreDialogService } from '../../../../shared/dialog/add-genre-dialog/add-genre-dialog.service';
+import { OrderService as ApiOrderService } from '../../../../shared/api/order.service';
+import { OrderFrequencyType, getOrderFrequencyTypeLabel } from '../../../../shared/enum/order-frequency-type';
+import { OrderDateType, getOrderDateTypeLabel} from '../../../../shared/enum/order-date-type';
+import { Order } from '../../../../shared/model/order';
 import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss'],
+  templateUrl: './order-request.component.html',
+  styleUrls: ['./order-request.component.scss'],
   providers: [DatePipe] 
 })
 
-export class OrderComponent implements OnInit {
+export class OrderRequestComponent implements OnInit {
 
   @ViewChild('form') private form: ElementRef;
 
@@ -88,6 +88,29 @@ export class OrderComponent implements OnInit {
     return new Date();
   }
 
+  get orderRequest(): Order {
+    let orderRequest: Order = {
+      name: this.title.value,
+      description: this.description.value,
+      desired_date: this.dateType.value === OrderDateType.Detail? this.datePipe.transform(this.date.value, 'yyyy/MM/dd') : OrderDateType.Always,
+      cooking_frequency: this.frequency.value,
+    }
+  
+    if(this.selectedCategories.length > 0) orderRequest = {...orderRequest, ...{categories: this.selectedCategories}};
+
+    if(this.creationTime) orderRequest = {...orderRequest, ...{creation_time: Number(this.creationTime)}};
+    
+    if(this.toolFormValues.length > 0) {
+      orderRequest = {...orderRequest, ...{tool: this.toolFormValues}};
+    }
+
+    if(this.ingredientsFormValues.length > 0) {
+      orderRequest = {...orderRequest, ...{ingredients: this.ingredientsFormValues}};
+    }
+
+    return orderRequest;
+  }
+
   ngOnInit(): void {
     this.requiredData = this.formBuilder.group({
       title: new FormControl(undefined, [Validators.required]),
@@ -142,34 +165,8 @@ export class OrderComponent implements OnInit {
   }
 
   public onSubmit() {
-    let orderRequest: OrderRequest = {
-      name: this.title.value,
-      description: this.description.value,
-      desired_date: this.dateType.value === OrderDateType.Detail? this.datePipe.transform(this.date.value, 'yyyy/MM/dd') : OrderDateType.Always,
-      cooking_frequency: this.frequency.value,
-    }
-  
-    if(this.selectedCategories.length > 0) {
-      let selectedCategoryIds: number[] = [];
-      this.selectedCategories.forEach(selectedCategory => {
-        selectedCategoryIds.push(selectedCategory.id);
-      });
-
-      orderRequest = {...orderRequest, ...{categories: selectedCategoryIds}};
-    }
-
-    if(this.creationTime) orderRequest = {...orderRequest, ...{creation_time: Number(this.creationTime)}};
-    
-    if(this.toolFormValues.length > 0) {
-      orderRequest = {...orderRequest, ...{tool: this.toolFormValues}};
-    }
-
-    if(this.ingredientsFormValues.length > 0) {
-      orderRequest = {...orderRequest, ...{ingredients: this.ingredientsFormValues}};
-    }
-    console.log(orderRequest);
-
-    this.apiOrder.createOrder(orderRequest).subscribe(response => {
+    console.log(this.orderRequest);
+    this.apiOrder.createOrder(this.orderRequest).subscribe(response => {
       console.log(response);
     });
   }

@@ -117,10 +117,7 @@
                     
                     <div class='optional-info__form' [class.focus]='isFocus' (click)='onFormFocus()'>
                         <mat-icon class='optional-info__form--searchIcon'>search</mat-icon>
-                        <div *ngFor='let selectedCategory of selectedCategories' class='optional-info__form--tag mat-elevation-z2'>
-                            <mat-icon (click)='removeTag(selectedCategory)'>remove_circle</mat-icon>
-                            <div>{{selectedCategory.name}}</div>
-                        </div>
+                        <ui-tag *ngFor='let selectedCategory of selectedCategories' [value]='selectedCategory.name' [isRemoval]='true' (remove)='removeTag(selectedCategory)'></ui-tag>
                         <div class='optional-info__form--inner'>
                             <input #form type='text' [(ngModel)]='input' (ngModelChange)='onSearchCategory()'
                                 dirPopUpTrigger [target]='resultPopup' [input]='input' [inputtable]='true' [width]='200' 
@@ -198,49 +195,7 @@
 
             <mat-step class='confirmation'>
                 <ng-template matStepLabel>確認画面</ng-template>
-                <table rules='all'>
-                    <th>入力タイトル</th>
-                    <th>入力内容</th>
-                    <tr>
-                        <td>料理名</td>
-                        <td>{{title.value}}</td>
-                    </tr>
-                    <tr>
-                        <td>注文内容の詳細説明</td>
-                        <td>{{description.value}}</td>
-                    </tr>
-                    <tr>
-                        <td>希望日</td>
-                        <td *ngIf='dateType.value == OrderDateTypeEnum.Detail'>{{date.value | date: 'yyyy/MM/dd'}}</td>
-                        <td *ngIf='dateType.value == OrderDateTypeEnum.Always'>{{_getOrderDateTypeLabel(OrderDateTypeEnum.Always)}}</td>
-                    </tr>
-                    <tr>
-                        <td>料理の頻度</td>
-                        <td>{{_getOrderFrequencyTypeLabel(frequency.value)}}</td>
-                    </tr>
-                    <tr *ngIf='selectedCategories.length > 0'>
-                        <td>カテゴリー</td>
-                        <td>
-                            <span *ngFor='let selectedCategory of selectedCategories'>{{selectedCategory.name}}&emsp;</span>
-                        </td>
-                    </tr>
-                    <tr *ngIf='creationTime'>
-                        <td>希望の作成時間</td>
-                        <td>{{creationTime}}&ensp;分以内</td>
-                    </tr>
-                    <tr *ngIf='toolFormValues.length > 0'>
-                        <td>持っている料理道具</td>
-                        <td>
-                            <span *ngFor='let toolFormValue of toolFormValues'>{{toolFormValue}}&emsp;</span>
-                        </td>
-                    </tr>
-                    <tr *ngIf='ingredientsFormValues.length > 0'>
-                        <td>希望する材料</td>
-                        <td>
-                            <span *ngFor='let ingredientsFormValue of ingredientsFormValues'>{{ingredientsFormValue}}&emsp;</span>
-                        </td>
-                    </tr>
-                </table>
+                <parts-order-detail-content [value]='orderRequest'></parts-order-detail-content>
                 <div class='confirmation__buttons'>
                     <button class='previousButton' mat-flat-button matStepperPrevious>
                         <mat-icon>keyboard_return</mat-icon><span>任意情報へ戻る</span>

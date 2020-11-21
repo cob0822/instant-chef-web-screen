@@ -7,6 +7,7 @@ import { ListModule } from './list/list.module';
 import { StickyNoteModule } from './sticky-note/sticky-note.module';
 import { SpinnerModule } from './spinner/spinner.module';
 import { CloneInputFormModule } from './clone-input-form/clone-input-form.module';
+import { TagModule } from './tag/tag.module';
 
 @NgModule({
   declarations: [],
@@ -18,7 +19,8 @@ import { CloneInputFormModule } from './clone-input-form/clone-input-form.module
     ListModule,
     StickyNoteModule,
     SpinnerModule,
-    CloneInputFormModule
+    CloneInputFormModule,
+    TagModule
   ],
   exports: [
     BoardModule,
@@ -27,7 +29,8 @@ import { CloneInputFormModule } from './clone-input-form/clone-input-form.module
     ListModule,
     StickyNoteModule,
     SpinnerModule,
-    CloneInputFormModule
+    CloneInputFormModule,
+    TagModule
   ]
 })
 export class UiModule { }

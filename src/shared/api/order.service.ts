@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/index';
-import { OrderRequest } from '../model/order-request';
+import { Order } from '../model/order';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class OrderService {
     return this.http.get<{id: number, name: string}[]>('/api/orders/categories', {params: new HttpParams().set('keyword', keyword)});
   }
 
-  public createOrder(request: OrderRequest): Observable<OrderRequest> {
-    return this.http.post<OrderRequest>('/api/orders', request);
+  public createOrder(request: Order): Observable<Order> {
+    return this.http.post<Order>('/api/orders', request);
   }
 }

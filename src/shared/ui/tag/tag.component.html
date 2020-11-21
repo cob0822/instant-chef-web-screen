@@ -1,0 +1,6 @@
+<div class='container' *ngIf='value'>
+    <div class='tag mat-elevation-z2'>
+        <mat-icon *ngIf='isRemoval' (click)='removeTag(value)'>remove_circle</mat-icon>
+        <div>{{value}}</div>
+    </div>
+</div>

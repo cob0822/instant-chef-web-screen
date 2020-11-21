@@ -1,0 +1,53 @@
+<div class='container'>
+    <section class='header'>
+        <div class='header__left'>
+            <div *ngIf='value.desired_date' class='header__desired-date mat-elevation-z2'>
+                <mat-icon>alarm</mat-icon>
+                <span>期限：{{value.desired_date == OrderDateTypeEnum.Always? _getOrderDateTypeLabel(value.desired_date) : value.desired_date}}</span>
+            </div>
+            <div *ngIf='value.categories' class='header__categories'>
+                <ui-tag *ngFor='let category of value.categories' [value]='category.name'></ui-tag>
+            </div>
+        </div>
+        <div class='header__right'>
+            <mat-icon>person</mat-icon>
+            <span>{{user.userName}}</span>
+        </div>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section class='title'>
+        <h1>{{value.name}}</h1>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <section class='required-info'>
+        <div class='description'>
+            <ui-sticky-note size='medium'>
+                <span class='stickyNote'>注文内容の説明</span>
+            </ui-sticky-note>
+            <div class='description__content'>
+                <span class='pre-wrap'>{{value.description}}</span>
+            </div>
+        </div>
+        <div class='basic-info'>
+            <ui-sticky-note size='medium'>
+                <span class='stickyNote'>注文に関する情報</span>
+            </ui-sticky-note>
+            <div class='basic-info__content'>
+                <h2>料理の頻度</h2>
+                {{_getOrderFrequencyTypeLabel(value.cooking_frequency)}}
+                <h2>希望の作成時間</h2>
+            </div>
+        </div>
+    </section>
+    
+
+    
+
+    <section></section>
+
+
+</div>
