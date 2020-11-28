@@ -68,9 +68,9 @@ export class LoginComponent implements OnInit {
 
     this.account.login(userInput)
       .subscribe(response => {
-        if(response.user) {
-          this.auth.loginInfo = response;
-          this.user.userInfo = response;
+        if(response) {
+          this.auth.isLogined = true;
+          this.user.userName = response.name;
           this.router.navigate(['/']);
         }
         this.handleError();

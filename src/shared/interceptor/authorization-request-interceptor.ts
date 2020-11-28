@@ -12,7 +12,7 @@ export class AuthorizationRequestInterceptor implements HttpInterceptor {
     req: HttpRequest<any>, 
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-
+    
     const newReq = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${this.auth.accessToken}`)
     })

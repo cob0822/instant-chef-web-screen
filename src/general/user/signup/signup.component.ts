@@ -126,8 +126,8 @@ export class SignupComponent implements OnInit {
 
     this.account.signup(userInput)
       .subscribe(response => {
-        this.auth.loginInfo = response;
-        this.user.userInfo = response;
+        this.auth.isLogined = true;
+        this.user.userName = response.name;
         this.router.navigate(['/']);
       },error => {
         this.email.setValue(undefined);

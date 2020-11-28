@@ -1,5 +1,5 @@
 <div class='container'>
-    <header class='header'>
+    <header class='header' [class.none-border]='isUploading'>
         <ui-sticky-note [size]='"xlarge"' [right-icon]='"pan_tool"'>
             <span class='stickyNote'>レシピ注文</span>
         </ui-sticky-note>
@@ -8,7 +8,10 @@
             <span>一時保存</span>
         </button>
     </header>
-    <main class='main'>
+    <div class='spinner' *ngIf='isUploading'>
+        <ui-spinner size='large'></ui-spinner>
+    </div>
+    <main class='main' *ngIf='!isUploading'>
         <mat-horizontal-stepper [class.notEditable]='requiredData.invalid' linear>
             <mat-step [stepControl]='requiredData' class='required-info'>
                 <ng-template matStepLabel>必須情報</ng-template>

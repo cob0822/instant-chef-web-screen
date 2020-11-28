@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user';
-import { ResponseWithAccessToken } from '../model/response-with-access-token';
 import { LocalStorageKey } from '../enum/local-storage-key';
 import { LocalStorageService } from '../service/local-storage.service';
 
@@ -17,10 +16,6 @@ export class UserService {
 
   set userName(token: string) {
     this.localStorage.setLocalStorage(LocalStorageKey.UserName, token);
-  }
-  
-  set userInfo(info: ResponseWithAccessToken<User>) {
-    this.userName = info.user.name!;
   }
 
   public removeUserName() {

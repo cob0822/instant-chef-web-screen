@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../model/user';
-import { ResponseWithAccessToken } from '../model/response-with-access-token';
 import { LocalStorageKey } from '../enum/local-storage-key';
 import { LocalStorageService } from '../service/local-storage.service';
 import { UserService } from '../service/user.service';
@@ -31,11 +30,6 @@ export class AuthService {
 
   set accessToken(token: string) {
     this.localStorage.setLocalStorage(LocalStorageKey.AccessToken, token);
-  }
-
-  set loginInfo(info: ResponseWithAccessToken<User>) {
-    this.isLogined = true;
-    this.accessToken = info.access_token;
   }
 
   public logout() {

@@ -36,6 +36,14 @@
     color: $deep-red;
 }
 
+.none-border {
+    border: none;
+}
+
+.spinner {
+    padding: 100px 0;
+}
+
 .main {
     background-color: white;
     border-right: 3px solid $light-gray;

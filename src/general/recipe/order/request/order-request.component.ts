@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { PageService } from '../../../../shared/service/page.service';
 import { PageType } from '../../../../shared/enum/page-type';
@@ -28,7 +29,7 @@ export class OrderRequestComponent implements OnInit {
 
   public isFocus: boolean = false;
   public isShow: boolean = false;
-
+  public isUploading: boolean = false;
   public input: string;
   public selectedDateType: OrderDateType = OrderDateType.Detail;
   public searchedCategories: {id: number, name: string}[] = [];
@@ -46,6 +47,7 @@ export class OrderRequestComponent implements OnInit {
               readonly page: PageService,
               readonly addGenre: AddGenreDialogService,
               private apiOrder: ApiOrderService,
+              private router: Router,
               private datePipe: DatePipe) { }
 
   get title(): FormControl {
@@ -165,9 +167,12 @@ export class OrderRequestComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log(this.orderRequest);
-    this.apiOrder.createOrder(this.orderRequest).subscribe(response => {
-      console.log(response);
+    this.isUploading = true;
+    this.apiOrder.createOrder(this.orderRequest).subscribe( _ => {
+      this.isUploading = false;
+      alert('レシピ注文のアップロードが完了しました。');
+      this.ngOnInit();
+      this.router.navigate(['/recipes/order']);
     });
   }
 
