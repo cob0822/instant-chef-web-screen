@@ -24,7 +24,7 @@
                             </ui-sticky-note>
                         </div>
                         <mat-form-field class='required-info__form' appearance="outline" color='warn'>
-                            <input matInput type='text' formControlName='title'/>
+                            <input matInput type='text' formControlName='title' maxlength='255'/>
                             <mat-error *ngIf='title.invalid'>
                                 <div class='error'>{{getErrorMessage(title)}}</div>
                             </mat-error>
@@ -40,7 +40,7 @@
                             </ui-sticky-note>
                         </div>
                         <mat-form-field class='required-info__form' appearance="outline" color='warn'>
-                            <textarea matInput type='textarea' formControlName='description'></textarea>
+                            <textarea matInput type='textarea' formControlName='description' maxlength='255' ></textarea>
                             <mat-error *ngIf='description.invalid'>
                                 <div class='error'>{{getErrorMessage(description)}}</div>
                             </mat-error>
@@ -58,8 +58,8 @@
                         
                         <div class='required-info__selector'>
                             <mat-radio-group class='required-info__selector--radio-button' formControlName='dateType'>
-                                <mat-radio-button [value]='OrderDateTypeEnum.Detail'>{{_getOrderDateTypeLabel(OrderDateTypeEnum.Detail)}}</mat-radio-button>
                                 <mat-radio-button [value]='OrderDateTypeEnum.Always'>{{_getOrderDateTypeLabel(OrderDateTypeEnum.Always)}}</mat-radio-button>
+                                <mat-radio-button [value]='OrderDateTypeEnum.Detail'>{{_getOrderDateTypeLabel(OrderDateTypeEnum.Detail)}}</mat-radio-button>
                             </mat-radio-group>
 
                             <mat-form-field class='required-info__selector--detail-input' [class.visible]='dateType.value == OrderDateTypeEnum.Detail' appearance="fill" color='warn'>
@@ -88,7 +88,6 @@
                             <mat-radio-button [value]='OrderFrequencyTypeEnum.AlwaysAsHobby'>{{_getOrderFrequencyTypeLabel(OrderFrequencyTypeEnum.AlwaysAsHobby)}}</mat-radio-button>
                             <mat-radio-button [value]='OrderFrequencyTypeEnum.Sometimes'>{{_getOrderFrequencyTypeLabel(OrderFrequencyTypeEnum.Sometimes)}}</mat-radio-button>
                             <mat-radio-button [value]='OrderFrequencyTypeEnum.NotAtAll'>{{_getOrderFrequencyTypeLabel(OrderFrequencyTypeEnum.NotAtAll)}}</mat-radio-button>
-                            <mat-radio-button [value]='OrderFrequencyTypeEnum.InputByMyself'>{{_getOrderFrequencyTypeLabel(OrderFrequencyTypeEnum.InputByMyself)}}</mat-radio-button>
                         </mat-radio-group>
                     </section>
 

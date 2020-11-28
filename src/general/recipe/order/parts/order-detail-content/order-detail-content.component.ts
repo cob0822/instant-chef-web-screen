@@ -20,7 +20,6 @@ export class OrderDetailContentComponent implements OnInit {
   _getOrderFrequencyTypeLabel = getOrderFrequencyTypeLabel;
 
   ngOnInit(): void {
-    console.log(this.value);
   }
 
 }

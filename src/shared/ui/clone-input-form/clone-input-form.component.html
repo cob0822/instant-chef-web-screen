@@ -3,7 +3,7 @@
         <div #cloneContainer></div>
     </div>
     <div class='container__form'>
-        <input type='text' [(ngModel)]='inputValue' (ngModelChange)='changeFormValues()'>
+        <input type='text' maxlength='255' [(ngModel)]='inputValue' (ngModelChange)='changeFormValues()'>
         <button class='container__form--add-button' mat-icon-button [disabled]='!inputValue'>
             <mat-icon [class.disabled]='!inputValue' (click)='cloneTemplate()'>add_circle</mat-icon>
         </button>
@@ -12,7 +12,7 @@
 
 <ng-template #template let-formValue='$implicit'>
     <div class='container__clone-container--inner' [id]='"container_" + formValue.id'>
-        <input [id]='"input_" + formValue.id' type='text' [(ngModel)]='formValue.value' (ngModelChange)='changeFormValues(formValue.id, formValue.value)'>
+        <input [id]='"input_" + formValue.id' type='text' maxlength='255' [(ngModel)]='formValue.value' (ngModelChange)='changeFormValues(formValue.id, formValue.value)'>
         <button class='container__clone-container--remove-button' mat-icon-button (click)='removeTemplate(formValue.id)'>
             <mat-icon>remove_circle</mat-icon>
         </button>

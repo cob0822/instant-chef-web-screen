@@ -117,7 +117,7 @@ export class OrderRequestComponent implements OnInit {
     this.requiredData = this.formBuilder.group({
       title: new FormControl(undefined, [Validators.required]),
       description: new FormControl(undefined, [Validators.required]),
-      dateType: new FormControl(OrderDateType.Detail, [Validators.required]),
+      dateType: new FormControl(OrderDateType.Always, [Validators.required]),
       date: new FormControl(undefined),
       frequency: new FormControl(OrderFrequencyType.AlwaysAsHobby),
     }, { validator: this.checkDateIsNullOrRequired });
