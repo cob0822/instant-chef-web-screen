@@ -71,35 +71,59 @@ mat-divider {
 }
 
 
-
-.required-info {
+.user-info {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+
+        &--top, &--bottom {
+            width: fit-content;
+            display: flex;
+            justify-content: flex-end;
+            font-size: $small;
+            align-items: center;
+            border: 2px $deep-brown solid;
+            border-radius: 5px;
+            padding: 10px 15px;
+            color: $deep-brown;
+        }
+
+        &--bottom {
+            margin-top: 20px;
+        }
+
+        mat-icon {
+            font-size: 23px;
+            margin-right: 10px;
+        }
+
+        span {
+            font-size: $small;
+        }
+}
+
+
+.description {
     margin-top: 80px;
-
-    .description {
-        width: 60%;
-        padding: 20px 20px 20px 0;
     
-        &__content {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid rgba(0, 0, 0, 0.12);
-            border-radius: 5px;
+    &__content {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 5px;
+    }
+}
+
+.tool, .ingredients {
+    margin-top: 40px;
+
+    &__content {
+        margin-top: 20px;
+        padding: 20px 10px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 5px;
+
+        &--name {
+            padding: 0 20px;
         }
     }
-
-    .basic-info {
-        width: 40%;
-        padding: 20px 0 20px 20px;
-
-        &__content {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid rgba(0, 0, 0, 0.12);
-            border-radius: 5px;
-        }
-    }
-
-
 }

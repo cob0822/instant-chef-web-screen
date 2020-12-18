@@ -100,7 +100,7 @@ export class OrderRequestComponent implements OnInit {
   
     if(this.selectedCategories.length > 0) orderRequest = {...orderRequest, ...{categories: this.selectedCategories}};
 
-    if(this.creationTime) orderRequest = {...orderRequest, ...{creation_time: Number(this.creationTime)}};
+    if(this.creationTime) orderRequest = {...orderRequest, ...{desired_cooking_time: Number(this.creationTime)}};
     
     if(this.toolFormValues.length > 0) {
       orderRequest = {...orderRequest, ...{tool: this.toolFormValues}};

@@ -2,7 +2,7 @@
     <section class='header'>
         <div class='header__left'>
             <div *ngIf='value.desired_date' class='header__desired-date mat-elevation-z2'>
-                <mat-icon>alarm</mat-icon>
+                <mat-icon>date_range</mat-icon>
                 <span>期限：{{value.desired_date == OrderDateTypeEnum.Always? _getOrderDateTypeLabel(value.desired_date) : value.desired_date}}</span>
             </div>
             <div *ngIf='value.categories' class='header__categories'>
@@ -23,31 +23,53 @@
 
     <mat-divider></mat-divider>
 
-    <section class='required-info'>
-        <div class='description'>
-            <ui-sticky-note size='medium'>
-                <span class='stickyNote'>注文内容の説明</span>
-            </ui-sticky-note>
-            <div class='description__content'>
-                <span class='pre-wrap'>{{value.description}}</span>
-            </div>
+    <section class='user-info'>
+        <div class='user-info--top' *ngIf='value.desired_cooking_time'>
+            <mat-icon>alarm</mat-icon>
+            <span>作成時間：{{value.desired_cooking_time}}&ensp;分</span>
         </div>
-        <div class='basic-info'>
-            <ui-sticky-note size='medium'>
-                <span class='stickyNote'>注文に関する情報</span>
-            </ui-sticky-note>
-            <div class='basic-info__content'>
-                <h2>料理の頻度</h2>
-                {{_getOrderFrequencyTypeLabel(value.cooking_frequency)}}
-                <h2>希望の作成時間</h2>
-            </div>
+        <div class='user-info--bottom' *ngIf='value.cooking_frequency'>
+            <mat-icon>restaurant_menu</mat-icon>
+            <span>料理の頻度：{{_getOrderFrequencyTypeLabel(value.cooking_frequency)}}</span>
         </div>
     </section>
-    
 
-    
+    <section class='description'>
+        <ui-sticky-note size='medium'>
+            <span class='stickyNote'>注文内容の説明</span>
+        </ui-sticky-note>
+        <div class='description__content'>
+            <span class='pre-wrap'>{{value.description}}</span>
+        </div>
+    </section>
 
-    <section></section>
+    <section class='tool' *ngIf='value.tool && value.tool.length > 0'>
+
+        <ui-sticky-note size='medium'>
+            <span class='stickyNote'>持っている道具</span>
+        </ui-sticky-note>
+        
+        <div class='tool__content'>
+            <ng-container *ngFor='let tool of value.tool; let isLast = last'>
+                <div class='tool__content--name'>{{tool}}</div>
+                <mat-divider *ngIf='!isLast'></mat-divider>
+            </ng-container>
+        </div>
+    </section>
+
+    <section class='ingredients' *ngIf='value.ingredients && value.ingredients.length > 0'>
+
+        <ui-sticky-note size='medium'>
+            <span class='stickyNote'>希望する材料</span>
+        </ui-sticky-note>
+        
+        <div class='ingredients__content'>
+            <ng-container *ngFor='let ingredient of value.ingredients; let isLast = last'>
+                <div class='ingredients__content--name'>{{ingredient}}</div>
+                <mat-divider *ngIf='!isLast'></mat-divider>
+            </ng-container>
+        </div>
+    </section>
 
 
 </div>

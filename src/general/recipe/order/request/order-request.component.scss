@@ -348,28 +348,13 @@
             display: flex;
         }
     }
-
-    table {
-        border: 1px solid black;
-        width: 100%;
-        margin-bottom: 50px;
-
-        th {
-            color: white;
-            background-color: $orange;
-            padding: 10px;
-        }
-
-        td {
-            padding: 10px;
-        }
-    }
     
 
     .confirmation {
         &__buttons {
             justify-content: space-between;
             display: flex;
+            margin-top: 50px;
 
             &--submitButton {
                 height: 50px;
