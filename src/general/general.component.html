@@ -45,9 +45,6 @@
         </section>
 
         <section class='content__feature'>
-            <div *ngIf='!page.isActive(PageTypeEnum.Signup, url) && !page.isActive(PageTypeEnum.Login, url)' class='image-box'>
-                <img [src]='imagePath'>
-            </div>
             <div class='content__grid' [class.userPage]='page.isActive(PageTypeEnum.Signup, url) || page.isActive(PageTypeEnum.Login, url)'>
                 <div class='content__grid--left'>
                     <router-outlet></router-outlet>

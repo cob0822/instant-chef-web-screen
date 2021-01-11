@@ -34,9 +34,9 @@ export class OrderRequestComponent implements OnInit {
   public selectedDateType: OrderDateType = OrderDateType.Detail;
   public searchedCategories: {id: number, name: string}[] = [];
   public requiredData: FormGroup;
-  public creationTime: number | undefined = undefined;
+  public creationTime: number | undefined;
   
-  public selectedCategories: {id: number, name: string}[] = [];
+  public selectedCategories: {id: number, name: string}[];
   public activeList: string;
   public isSearching: boolean = false;
   
@@ -121,6 +121,9 @@ export class OrderRequestComponent implements OnInit {
       date: new FormControl(undefined),
       frequency: new FormControl(OrderFrequencyType.AlwaysAsHobby),
     }, { validator: this.checkDateIsNullOrRequired });
+
+    this.creationTime = undefined;
+    this.selectedCategories = [];
   }
 
   public getErrorMessage(form: FormControl): string | undefined {

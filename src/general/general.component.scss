@@ -189,13 +189,13 @@ header {
         grid-template-columns: calc(100% - 350px) 350px;
 
         &--left {
-            padding: 30px 30px;
+            padding: 0 30px;
         }
 
         &--right {
             background-color: white;
             z-index: 5;
-            padding: 30px 30px;
+            padding: 40px 30px;
 
             .board {
                 margin-bottom: 30px;

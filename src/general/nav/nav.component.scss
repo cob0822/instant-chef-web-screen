@@ -17,8 +17,10 @@
         color: black;
 
         mat-icon {
-            font-size: 20px;
+            font-size: 24px;
             margin-right: 10px;
+            position: relative;
+            top: 3px;
         }
 
         &:hover {
@@ -42,9 +44,11 @@
             padding: 10px 50px;
 
             mat-icon {
-            font-size: $small;
-            margin-right: 10px;
-        }
+                font-size: 18px;
+                margin-right: 10px;
+                position: relative;
+                top: 3px;
+            }
         }
     }
 
