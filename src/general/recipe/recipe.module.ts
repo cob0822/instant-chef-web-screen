@@ -10,12 +10,14 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { JPDateAdapter } from '../../shared/adapter/jp-dateadapter';
 import { provideHttpInterceptors } from '../../shared/interceptor/http-interceptors';
 import { OrderDetailContentComponent } from './order/parts/order-detail-content/order-detail-content.component';
+import { OrderListComponent } from './order/list/order-list.component';
 
 @NgModule({
   declarations: [
     IndexComponent, 
     OrderRequestComponent, 
-    OrderDetailContentComponent,
+    OrderDetailContentComponent, 
+    OrderListComponent,
   ],
   imports: [
     RecipeRoutingModule,

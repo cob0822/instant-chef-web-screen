@@ -17,4 +17,9 @@ export class OrderService {
   public createOrder(request: Order): Observable<Order> {
     return this.http.post<Order>('/api/orders', request);
   }
+
+  public index(page?: number): Observable<any> {
+    page = page? page : 1;
+    return this.http.get<any>(`/api/orders?page=${page}`);
+  }
 }

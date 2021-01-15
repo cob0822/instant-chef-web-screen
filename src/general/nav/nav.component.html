@@ -10,8 +10,13 @@
             <mat-icon>restaurant</mat-icon><span>レシピ関連</span>
         </a>
         <li *ngIf='isLogined'>
-            <a [class.active]='page.isActive(PageTypeEnum.Order, url, true)' [routerLink]="'/recipes/order'">
+            <a [class.active]='page.isActive(PageTypeEnum.OrderRequest, url, true)' [routerLink]="'/recipes/order_request'">
                 <mat-icon>pan_tool</mat-icon><span>注文する</span>
+            </a>
+        </li>
+        <li *ngIf='isLogined'>
+            <a [class.active]='page.isActive(PageTypeEnum.OrderList, url, true)' [routerLink]="'/recipes/order_list'">
+                <mat-icon>pan_tool</mat-icon><span>注文一覧</span>
             </a>
         </li>
         <li *ngIf='isLogined'>
@@ -27,11 +32,6 @@
         <li>
             <a>
                 <mat-icon>menu_book</mat-icon><span>レシピ一覧</span>
-            </a>
-        </li>
-        <li>
-            <a>
-                <mat-icon>menu_book</mat-icon><span>注文一覧</span>
             </a>
         </li>
         <li>

@@ -4,6 +4,7 @@ export enum PageType {
     Login = 'login',
     Signup = 'signup',
     Recipe = 'recipes',
-    Order = 'recipes/order',
+    OrderRequest = 'recipes/order_request',
+    OrderList = 'recipes/order_list',
     RecipeMenu = 'recipes/menu'
 }

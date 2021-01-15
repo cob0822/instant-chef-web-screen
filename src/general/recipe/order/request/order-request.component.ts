@@ -4,7 +4,7 @@ import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms'
 import { PageService } from '../../../../shared/service/page.service';
 import { PageType } from '../../../../shared/enum/page-type';
 import { AddGenreDialogService } from '../../../../shared/dialog/add-genre-dialog/add-genre-dialog.service';
-import { OrderService as ApiOrderService } from '../../../../shared/api/order.service';
+import { OrderService } from '../../../../shared/api/order.service';
 import { OrderFrequencyType, getOrderFrequencyTypeLabel } from '../../../../shared/enum/order-frequency-type';
 import { OrderDateType, getOrderDateTypeLabel} from '../../../../shared/enum/order-date-type';
 import { Order } from '../../../../shared/model/order';
@@ -46,7 +46,7 @@ export class OrderRequestComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               readonly page: PageService,
               readonly addGenre: AddGenreDialogService,
-              private apiOrder: ApiOrderService,
+              private order: OrderService,
               private router: Router,
               private datePipe: DatePipe) { }
 
@@ -136,7 +136,7 @@ export class OrderRequestComponent implements OnInit {
     this.isSearching = true;
     this.searchedCategories = [];
     if(this.input && this.input.trim()) {
-      this.apiOrder.searchCategory(this.input).subscribe(results => {
+      this.order.searchCategory(this.input).subscribe(results => {
         this.searchedCategories = results;
         if(results.length > 0) this.activeList = this.searchedCategories[0].name;
         this.isSearching = false;
@@ -171,7 +171,7 @@ export class OrderRequestComponent implements OnInit {
 
   public onSubmit() {
     this.isUploading = true;
-    this.apiOrder.createOrder(this.orderRequest).subscribe( _ => {
+    this.order.createOrder(this.orderRequest).subscribe( _ => {
       this.isUploading = false;
       alert('レシピ注文のアップロードが完了しました。');
       this.ngOnInit();
