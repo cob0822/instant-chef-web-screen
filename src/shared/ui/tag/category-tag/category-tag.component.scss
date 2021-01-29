@@ -1,4 +1,4 @@
-@import '../../../scss/color.scss';
+@import '../../../../scss/color.scss';
 
 .container {
     width: fit-content;
@@ -21,7 +21,9 @@
         cursor: pointer;
         margin-top: 5px;
     }
+}
 
+.removal {
     &:hover {
         opacity: 0.6;
     }

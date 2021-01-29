@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'ui-tag',
-  templateUrl: './tag.component.html',
-  styleUrls: ['./tag.component.scss']
+  selector: 'ui-category-tag',
+  templateUrl: './category-tag.component.html',
+  styleUrls: ['./category-tag.component.scss']
 })
-export class TagComponent implements OnInit {
+export class CategoryTagComponent implements OnInit {
   
   @Input('value') public value?: string;
   @Input('isRemoval') public isRemoval: boolean = false;

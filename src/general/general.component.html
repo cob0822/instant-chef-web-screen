@@ -25,12 +25,21 @@
             </div>
                 
             <div class='head-line__right' *ngIf='!isLogined; else logined'>
-                <button [class.active]='page.isActive(PageTypeEnum.Signup, url)' [routerLink]="'/signup'" mat-flat-button><mat-icon>perm_identity</mat-icon><span>無料登録</span></button>
-                <button class='head-line__right--log-in' [class.active]='page.isActive(PageTypeEnum.Login, url)' [routerLink]="'/login'" mat-flat-button><mat-icon>login</mat-icon><span>ログイン</span></button>
+                <button [class.active]='page.isActive(PageTypeEnum.Signup, url)' [routerLink]="'/signup'" mat-flat-button>
+                    <mat-icon>perm_identity</mat-icon>
+                    <span>無料登録</span>
+                </button>
+                <button class='head-line__right--log-in' [class.active]='page.isActive(PageTypeEnum.Login, url)' [routerLink]="'/login'" mat-flat-button>
+                    <mat-icon>login</mat-icon>
+                    <span>ログイン</span>
+                </button>
             </div>
             <ng-template #logined>
                 <div class='head-line__right'>
-                    <button class='head-line__right--user-button' mat-flat-button [matMenuTriggerFor]="menu"><mat-icon>person</mat-icon>{{user.userName}}&ensp;さん</button>
+                    <button class='head-line__right--user-button' mat-flat-button [matMenuTriggerFor]="menu">
+                        <mat-icon>person</mat-icon>
+                        {{user.userName}}&ensp;さん
+                    </button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item (click)='auth.logout()'>ログアウト</button>
                       </mat-menu>

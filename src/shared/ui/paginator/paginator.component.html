@@ -1,0 +1,18 @@
+<div class='container'>
+    <button class='pre-button active' 
+        *ngIf='currentPage != 1'
+        (click)='transition.emit(currentPage - 1)'
+    >＜</button>
+    <button class='page-button' 
+        *ngFor='let page of pages' 
+        [class.active]='page == currentPage'
+        [disabled]='page == currentPage'
+        (click)='transition.emit(page)'
+        >
+        {{page}}
+    </button>
+    <button class='next-button active' 
+        *ngIf='currentPage != lastPage'
+        (click)='transition.emit(currentPage + 1)'
+    >＞</button>
+</div>

@@ -15,7 +15,7 @@
             </a>
         </li>
         <li *ngIf='isLogined'>
-            <a [class.active]='page.isActive(PageTypeEnum.OrderList, url, true)' [routerLink]="'/recipes/order_list'">
+            <a [class.active]='page.isActive(PageTypeEnum.OrderList, url, true) || page.isActive(PageTypeEnum.OrderDetail, url)' [routerLink]="'/recipes/order_list'">
                 <mat-icon>pan_tool</mat-icon><span>注文一覧</span>
             </a>
         </li>

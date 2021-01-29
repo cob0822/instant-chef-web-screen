@@ -7,8 +7,9 @@ import { AddGenreDialogService } from '../../../../shared/dialog/add-genre-dialo
 import { OrderService } from '../../../../shared/api/order.service';
 import { OrderFrequencyType, getOrderFrequencyTypeLabel } from '../../../../shared/enum/order-frequency-type';
 import { OrderDateType, getOrderDateTypeLabel} from '../../../../shared/enum/order-date-type';
-import { Order } from '../../../../shared/model/order';
+import { OrderRequest } from '../../../../shared/model/order';
 import { DatePipe } from '@angular/common';
+import { Category } from '../../../../shared/model/category';
 
 @Component({
   selector: 'app-order',
@@ -32,11 +33,11 @@ export class OrderRequestComponent implements OnInit {
   public isUploading: boolean = false;
   public input: string;
   public selectedDateType: OrderDateType = OrderDateType.Detail;
-  public searchedCategories: {id: number, name: string}[] = [];
+  public searchedCategories: Category[] = [];
   public requiredData: FormGroup;
   public creationTime: number | undefined;
   
-  public selectedCategories: {id: number, name: string}[];
+  public selectedCategories: Category[];
   public activeList: string;
   public isSearching: boolean = false;
   
@@ -90,8 +91,8 @@ export class OrderRequestComponent implements OnInit {
     return new Date();
   }
 
-  get orderRequest(): Order {
-    let orderRequest: Order = {
+  get orderRequest(): OrderRequest {
+    let orderRequest: OrderRequest = {
       name: this.title.value,
       description: this.description.value,
       desired_date: this.dateType.value === OrderDateType.Detail? this.datePipe.transform(this.date.value, 'yyyy/MM/dd') : OrderDateType.Always,
@@ -144,12 +145,12 @@ export class OrderRequestComponent implements OnInit {
     }
   }
   
-  public addTag(searchedCategory: {id: number, name: string}) {
+  public addTag(searchedCategory: Category) {
     this.input = undefined;
     if(!this.selectedCategories.find(v => v.id == searchedCategory.id)) this.selectedCategories.push(searchedCategory);
   }
 
-  public removeTag(selectedCategory: {id: number, name: string}) {
+  public removeTag(selectedCategory: Category) {
     this.selectedCategories = this.selectedCategories.filter(v => { return v.id !== selectedCategory.id});
   }
 
@@ -175,7 +176,7 @@ export class OrderRequestComponent implements OnInit {
       this.isUploading = false;
       alert('レシピ注文のアップロードが完了しました。');
       this.ngOnInit();
-      this.router.navigate(['/recipes/order']);
+      this.router.navigate(['/recipes/order_request']);
     });
   }
 

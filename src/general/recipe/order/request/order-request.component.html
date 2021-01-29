@@ -1,7 +1,7 @@
 <div class='container'>
     <header class='header' [class.none-border]='isUploading'>
         <ui-sticky-note [size]='"xlarge"' [right-icon]='"pan_tool"'>
-            <span class='stickyNote'>レシピ注文</span>
+            <span class='stickyNote'>注文する</span>
         </ui-sticky-note>
         <button mat-raised-button>
             <mat-icon>save_alt</mat-icon>
@@ -119,7 +119,7 @@
                     
                     <div class='optional-info__form' [class.focus]='isFocus' (click)='onFormFocus()'>
                         <mat-icon class='optional-info__form--searchIcon'>search</mat-icon>
-                        <ui-tag *ngFor='let selectedCategory of selectedCategories' [value]='selectedCategory.name' [isRemoval]='true' (remove)='removeTag(selectedCategory)'></ui-tag>
+                        <ui-category-tag *ngFor='let selectedCategory of selectedCategories' [value]='selectedCategory.name' [isRemoval]='true' (remove)='removeTag(selectedCategory)'></ui-category-tag>
                         <div class='optional-info__form--inner'>
                             <input #form type='text' [(ngModel)]='input' (ngModelChange)='onSearchCategory()'
                                 dirPopUpTrigger [target]='resultPopup' [input]='input' [inputtable]='true' [width]='200' 

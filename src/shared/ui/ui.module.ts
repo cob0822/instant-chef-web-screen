@@ -8,6 +8,7 @@ import { StickyNoteModule } from './sticky-note/sticky-note.module';
 import { SpinnerModule } from './spinner/spinner.module';
 import { CloneInputFormModule } from './clone-input-form/clone-input-form.module';
 import { TagModule } from './tag/tag.module';
+import { PaginatorModule } from './paginator/paginator.module';
 
 @NgModule({
   declarations: [],
@@ -20,7 +21,8 @@ import { TagModule } from './tag/tag.module';
     StickyNoteModule,
     SpinnerModule,
     CloneInputFormModule,
-    TagModule
+    TagModule,
+    PaginatorModule
   ],
   exports: [
     BoardModule,
@@ -30,7 +32,8 @@ import { TagModule } from './tag/tag.module';
     StickyNoteModule,
     SpinnerModule,
     CloneInputFormModule,
-    TagModule
+    TagModule,
+    PaginatorModule
   ]
 })
 export class UiModule { }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryTagComponent } from './category-tag/category-tag.component';
+import { UserTagComponent } from './user-tag.component';
 
-describe('TagComponent', () => {
-  let component: CategoryTagComponent;
-  let fixture: ComponentFixture<CategoryTagComponent>;
+describe('UserTagComponent', () => {
+  let component: UserTagComponent;
+  let fixture: ComponentFixture<UserTagComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoryTagComponent ]
+      declarations: [ UserTagComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CategoryTagComponent);
+    fixture = TestBed.createComponent(UserTagComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,1 +1,38 @@
-<p>order-list works!</p>
+<div class='container'>
+    <header class='header'>
+        <ui-sticky-note [size]='"xlarge"' [right-icon]='"pan_tool"'>
+            <span class='stickyNote'>注文一覧</span>
+        </ui-sticky-note>
+    </header>
+
+    <div class='spinner' *ngIf='isLoading'>
+        <ui-spinner size='large'></ui-spinner>
+    </div>
+
+    <ng-container *ngIf='!isLoading'>
+        <div class='paginator' *ngIf='orders.meta.last_page > 1'>
+            <ui-paginator
+                [lastPage]='orders.meta.last_page'
+                [currentPage]='currentPage'
+                (transition)='load($event)'
+            ></ui-paginator>
+        </div>
+    </ng-container>
+
+    <main *ngIf='!isLoading'>
+        <div *ngFor='let order of orders.data' class='list mat-elevation-z3'>
+            <parts-order-title-content
+                [name]='order.name'
+                [desired_date]='order.desired_date'
+                [categories]='order.categories'
+                type='list'
+                [order_id]='order.id'
+            >
+            </parts-order-title-content>
+            <div class='list__bottom'>
+                <p class='list__bottom--description'>{{ order.description }}</p>
+            </div>
+        </div>
+    </main>
+
+</div>

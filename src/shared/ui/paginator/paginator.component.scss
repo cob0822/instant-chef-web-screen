@@ -1,0 +1,42 @@
+@import '../../../scss/color.scss';
+@import '../../../scss/font-size.scss';
+
+.container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    &:not(:last-of-type) {
+        margin-right: 5px;
+    }
+
+    &:hover {
+        opacity: 0.6;
+    }
+
+    &:active {
+        border: 1px $deep-red solid;
+    }
+
+    height: 30px;
+    cursor: pointer;
+}
+
+.pre-button, .next-button {
+    width: 70px
+}
+
+.page-button {
+    background-color: white;
+    border: 1px $gray solid;
+    border-radius: 5px;
+    width: 40px;
+}
+
+.active {
+    background-color: $deep-orange;
+    border: 1px $deep-red solid;
+    border-radius: 5px;
+    color: white;
+}

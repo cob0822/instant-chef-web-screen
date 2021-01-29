@@ -1,27 +1,12 @@
 <div class='container'>
-    <section class='header'>
-        <div class='header__left'>
-            <div *ngIf='value.desired_date' class='header__desired-date mat-elevation-z2'>
-                <mat-icon>date_range</mat-icon>
-                <span>期限：{{value.desired_date == OrderDateTypeEnum.Always? _getOrderDateTypeLabel(value.desired_date) : value.desired_date}}</span>
-            </div>
-            <div *ngIf='value.categories' class='header__categories'>
-                <ui-tag *ngFor='let category of value.categories' [value]='category.name'></ui-tag>
-            </div>
-        </div>
-        <div class='header__right'>
-            <mat-icon>person</mat-icon>
-            <span>{{user.userName}}</span>
-        </div>
+    <section>
+        <parts-order-title-content
+            [name]='value.name'
+            [desired_date]='value.desired_date'
+            [categories]='value.categories'
+        >
+        </parts-order-title-content>
     </section>
-
-    <mat-divider></mat-divider>
-
-    <section class='title'>
-        <h1>{{value.name}}</h1>
-    </section>
-
-    <mat-divider></mat-divider>
 
     <section class='user-info'>
         <div class='user-info--top' *ngIf='value.desired_cooking_time'>

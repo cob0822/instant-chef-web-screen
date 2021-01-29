@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Order } from '../../../../../shared/model/order';
+import { OrderRequest } from '../../../../../shared/model/order';
 import { OrderDateType, getOrderDateTypeLabel } from '../../../../../shared/enum/order-date-type';
-import { UserService } from '../../../../../shared/service/user.service';
 import { getOrderFrequencyTypeLabel } from '../../../../../shared/enum/order-frequency-type';
 
 @Component({
@@ -11,9 +10,9 @@ import { getOrderFrequencyTypeLabel } from '../../../../../shared/enum/order-fre
 })
 export class OrderDetailContentComponent implements OnInit {
 
-  @Input('value') public value: Order;
+  @Input('value') public value: OrderRequest;
 
-  constructor(readonly user: UserService) { }
+  constructor() { }
 
   OrderDateTypeEnum = OrderDateType;
   _getOrderDateTypeLabel = getOrderDateTypeLabel;
