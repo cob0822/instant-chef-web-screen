@@ -28,14 +28,14 @@
         </div>
     </section>
 
-    <section class='tool' *ngIf='value.tool && value.tool.length > 0'>
+    <section class='tool' *ngIf='value.tools && value.tools.length > 0'>
 
         <ui-sticky-note size='medium'>
             <span class='stickyNote'>持っている道具</span>
         </ui-sticky-note>
         
         <div class='tool__content'>
-            <ng-container *ngFor='let tool of value.tool; let isLast = last'>
+            <ng-container *ngFor='let tool of value.tools; let isLast = last'>
                 <div class='tool__content--name'>{{tool}}</div>
                 <mat-divider *ngIf='!isLast'></mat-divider>
             </ng-container>

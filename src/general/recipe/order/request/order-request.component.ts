@@ -7,7 +7,7 @@ import { AddGenreDialogService } from '../../../../shared/dialog/add-genre-dialo
 import { OrderService } from '../../../../shared/api/order.service';
 import { OrderFrequencyType, getOrderFrequencyTypeLabel } from '../../../../shared/enum/order-frequency-type';
 import { OrderDateType, getOrderDateTypeLabel} from '../../../../shared/enum/order-date-type';
-import { OrderRequest } from '../../../../shared/model/order';
+import { Order } from '../../../../shared/model/order';
 import { DatePipe } from '@angular/common';
 import { Category } from '../../../../shared/model/category';
 
@@ -91,8 +91,8 @@ export class OrderRequestComponent implements OnInit {
     return new Date();
   }
 
-  get orderRequest(): OrderRequest {
-    let orderRequest: OrderRequest = {
+  get orderRequest(): Order {
+    let orderRequest: Order = {
       name: this.title.value,
       description: this.description.value,
       desired_date: this.dateType.value === OrderDateType.Detail? this.datePipe.transform(this.date.value, 'yyyy/MM/dd') : OrderDateType.Always,
@@ -104,7 +104,7 @@ export class OrderRequestComponent implements OnInit {
     if(this.creationTime) orderRequest = {...orderRequest, ...{desired_cooking_time: Number(this.creationTime)}};
     
     if(this.toolFormValues.length > 0) {
-      orderRequest = {...orderRequest, ...{tool: this.toolFormValues}};
+      orderRequest = {...orderRequest, ...{tools: this.toolFormValues}};
     }
 
     if(this.ingredientsFormValues.length > 0) {
@@ -172,9 +172,10 @@ export class OrderRequestComponent implements OnInit {
 
   public onSubmit() {
     this.isUploading = true;
+    console.log(this.orderRequest);
     this.order.createOrder(this.orderRequest).subscribe( _ => {
-      this.isUploading = false;
       alert('レシピ注文のアップロードが完了しました。');
+      this.isUploading = false;
       this.ngOnInit();
       this.router.navigate(['/recipes/order_request']);
     });

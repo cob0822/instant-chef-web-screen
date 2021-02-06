@@ -1,1 +1,15 @@
-<p>order-detail works!</p>
+<div class='container'>
+    <header class='header'>
+        <ui-sticky-note [size]='"xlarge"' [right-icon]='"pan_tool"'>
+            <span class='stickyNote'>注文内容</span>
+        </ui-sticky-note>
+    </header>
+    <main class='main'>
+        <parts-order-detail-content
+        *ngIf='!isLoading'
+        [value]='orderDetail'
+        >
+        </parts-order-detail-content>
+        <ui-spinner *ngIf='isLoading'></ui-spinner>
+    </main>
+</div>

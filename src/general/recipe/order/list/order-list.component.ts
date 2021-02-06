@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../../../shared/api/order.service';
-import { OrderList } from '../../../../shared/model/order';
+import { Order } from '../../../../shared/model/order';
 import { Pagination } from '../../../../shared/model/pagination';
 
 @Component({
@@ -10,7 +10,7 @@ import { Pagination } from '../../../../shared/model/pagination';
 })
 export class OrderListComponent implements OnInit {
 
-  public orders: Pagination<OrderList>;
+  public orders: Pagination<Order>;
   public currentPage: number;
   public isLoading: boolean = false;
 
@@ -24,6 +24,7 @@ export class OrderListComponent implements OnInit {
     this.currentPage = page;
     this.isLoading = true;
     this.order.index(page).subscribe(response => {
+      console.log(response);
       this.orders = response;
       this.isLoading = false;
     });

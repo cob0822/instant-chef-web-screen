@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OrderRequest } from '../../../../../shared/model/order';
+import { Order } from '../../../../../shared/model/order';
 import { OrderDateType, getOrderDateTypeLabel } from '../../../../../shared/enum/order-date-type';
 import { getOrderFrequencyTypeLabel } from '../../../../../shared/enum/order-frequency-type';
 
@@ -10,7 +10,7 @@ import { getOrderFrequencyTypeLabel } from '../../../../../shared/enum/order-fre
 })
 export class OrderDetailContentComponent implements OnInit {
 
-  @Input('value') public value: OrderRequest;
+  @Input('value') public value: Order;
 
   constructor() { }
 

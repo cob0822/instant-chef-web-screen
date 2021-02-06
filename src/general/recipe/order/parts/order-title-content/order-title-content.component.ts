@@ -24,11 +24,10 @@ export class OrderTitleContentComponent implements OnInit {
   public _getOrderDateTypeLabel = getOrderDateTypeLabel;
 
   ngOnInit(): void {
-    console.log(this.order_id);
   }
 
   public trasition() {
-    this.router.navigate(['recipes//order_detail/'], {queryParams: {id: this.order_id}});
+    this.router.navigate(['recipes/order_detail/'], {queryParams: {id: this.order_id}});
   }
 
 }
