@@ -38,7 +38,7 @@ export class OrderListComponent implements OnInit {
     });
   }
 
-  public isSort(): void {
+  public sort(): void {
     this.isDesc = !this.isDesc;
     this.load();
   }

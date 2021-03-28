@@ -4,7 +4,7 @@
             <span class='stickyNote'>注文一覧</span>
         </ui-sticky-note>
         <div class='header__sort' *ngIf='!isLoading'>
-            <button mat-raised-button (click)='isDesc = !isDesc '>
+            <button mat-raised-button (click)='sort()'>
                 <span *ngIf='isDesc; else asc'>期限降順&emsp;↓</span>
                 <ng-template #asc>
                     <span>期限昇順&emsp;↑</span>
