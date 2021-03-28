@@ -7,7 +7,7 @@ import { AddGenreDialogService } from '../../../../shared/dialog/add-genre-dialo
 import { OrderService } from '../../../../shared/api/order.service';
 import { OrderFrequencyType, getOrderFrequencyTypeLabel } from '../../../../shared/enum/order-frequency-type';
 import { OrderDateType, getOrderDateTypeLabel} from '../../../../shared/enum/order-date-type';
-import { Order } from '../../../../shared/model/order';
+import { OrderRequest, OrderResponse } from '../../../../shared/model/order';
 import { DatePipe } from '@angular/common';
 import { Category } from '../../../../shared/model/category';
 
@@ -91,8 +91,8 @@ export class OrderRequestComponent implements OnInit {
     return new Date();
   }
 
-  get orderRequest(): Order {
-    let orderRequest: Order = {
+  get orderRequest(): OrderRequest {
+    let orderRequest: OrderRequest = {
       name: this.title.value,
       description: this.description.value,
       desired_date: this.dateType.value === OrderDateType.Detail? this.datePipe.transform(this.date.value, 'yyyy/MM/dd') : OrderDateType.Always,
@@ -112,6 +112,32 @@ export class OrderRequestComponent implements OnInit {
     }
 
     return orderRequest;
+  }
+
+  get orderDetailTypeValue(): OrderResponse {
+    let orderResponse: OrderResponse = Object.assign({}, 
+      this.orderRequest, 
+      {id: 0},
+      {
+        tools: this.orderRequest.tools && this.orderRequest.tools.length > 0? 
+          this.orderRequest.tools.map(tool => {
+            return {
+              id: 0,
+              name: tool
+            }
+          }) : []
+      },
+      {
+        ingredients: this.orderRequest.ingredients && this.orderRequest.ingredients.length > 0? 
+          this.orderRequest.ingredients.map(ingredient => {
+            return {
+              id: 0,
+              name: ingredient
+            }
+          }) : []
+      }
+    )
+    return orderResponse
   }
 
   ngOnInit(): void {
@@ -172,7 +198,6 @@ export class OrderRequestComponent implements OnInit {
 
   public onSubmit() {
     this.isUploading = true;
-    console.log(this.orderRequest);
     this.order.createOrder(this.orderRequest).subscribe( _ => {
       alert('レシピ注文のアップロードが完了しました。');
       this.isUploading = false;

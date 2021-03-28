@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/index';
-import { Order } from '../model/order';
+import { OrderRequest, OrderResponse } from '../model/order';
 import { Pagination } from '../model/pagination';
 import { Category } from '../model/category';
 
@@ -16,16 +16,16 @@ export class OrderService {
     return this.http.get<Category[]>('/api/orders/categories', {params: new HttpParams().set('keyword', keyword)});
   }
 
-  public createOrder(request: Order): Observable<Order> {
-    return this.http.post<Order>('/api/orders', request);
+  public createOrder(request: OrderRequest): Observable<OrderRequest> {
+    return this.http.post<OrderRequest>('/api/orders', request);
   }
 
-  public index(page?: number): Observable<Pagination<Order>> {
+  public index(page?: number): Observable<Pagination<OrderResponse>> {
     page = page? page : 1;
-    return this.http.get<Pagination<Order>>(`/api/orders?page=${page}`);
+    return this.http.get<Pagination<OrderResponse>>(`/api/orders?page=${page}`);
   }
 
-  public show(order_id: number): Observable<Order> {
-    return this.http.get<Order>(`/api/orders/detail/${order_id}`);
+  public show(order_id: number): Observable<OrderResponse> {
+    return this.http.get<OrderResponse>(`/api/orders/detail/${order_id}`);
   }
 }

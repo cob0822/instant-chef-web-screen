@@ -36,7 +36,7 @@
         
         <div class='tool__content'>
             <ng-container *ngFor='let tool of value.tools; let isLast = last'>
-                <div class='tool__content--name'>{{tool}}</div>
+                <div *ngIf='tool' class='tool__content--name'>{{tool.name}}</div>
                 <mat-divider *ngIf='!isLast'></mat-divider>
             </ng-container>
         </div>
@@ -50,7 +50,7 @@
         
         <div class='ingredients__content'>
             <ng-container *ngFor='let ingredient of value.ingredients; let isLast = last'>
-                <div class='ingredients__content--name'>{{ingredient}}</div>
+                <div class='ingredients__content--name'>{{ingredient.name}}</div>
                 <mat-divider *ngIf='!isLast'></mat-divider>
             </ng-container>
         </div>
