@@ -13,6 +13,15 @@ export class OrderListComponent implements OnInit {
   public orders: Pagination<Order>;
   public currentPage: number;
   public isLoading: boolean = false;
+  public _isDesc: boolean = true;
+
+  get isDesc(): boolean {
+    return this._isDesc;
+  }
+
+  set isDesc(order: boolean) {
+    this._isDesc = order;
+  }
 
   constructor(private order: OrderService) {}
 
@@ -23,11 +32,15 @@ export class OrderListComponent implements OnInit {
   public load(page: number = 1): void {
     this.currentPage = page;
     this.isLoading = true;
-    this.order.index(page).subscribe(response => {
-      console.log(response);
+    this.order.index(page, this.isDesc).subscribe(response => {
       this.orders = response;
       this.isLoading = false;
     });
+  }
+
+  public isSort(): void {
+    this.isDesc = !this.isDesc;
+    this.load();
   }
 
 }

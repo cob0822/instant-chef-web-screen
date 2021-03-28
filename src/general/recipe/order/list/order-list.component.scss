@@ -16,12 +16,16 @@ mat-divider {
 }
 
 .header {
-    padding: 40px 0;
+    padding: 40px 0 25px;
     position: sticky;
     top: 0;
     left: 0;
     background-color: $background;
     z-index: 5;
+
+    &__sort {
+        margin-top: 40px;
+    }
 }
 
 .paginator {

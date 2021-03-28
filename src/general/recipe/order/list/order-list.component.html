@@ -3,14 +3,18 @@
         <ui-sticky-note [size]='"xlarge"' [right-icon]='"pan_tool"'>
             <span class='stickyNote'>注文一覧</span>
         </ui-sticky-note>
+        <div class='header__sort' *ngIf='!isLoading'>
+            <button mat-raised-button (click)='isDesc = !isDesc '>
+                <span *ngIf='isDesc; else asc'>期限降順&emsp;↓</span>
+                <ng-template #asc>
+                    <span>期限昇順&emsp;↑</span>
+                </ng-template>
+            </button>
+        </div>
     </header>
 
     <div class='spinner' *ngIf='isLoading'>
         <ui-spinner size='large'></ui-spinner>
-    </div>
-
-    <div class='filter'>
-        
     </div>
 
     <ng-container *ngIf='!isLoading'>

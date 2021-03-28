@@ -20,9 +20,10 @@ export class OrderService {
     return this.http.post<OrderRequest>('/api/orders', request);
   }
 
-  public index(page?: number): Observable<Pagination<OrderResponse>> {
+  public index(page: number, isDesc: boolean): Observable<Pagination<OrderResponse>> {
     page = page? page : 1;
-    return this.http.get<Pagination<OrderResponse>>(`/api/orders?page=${page}`);
+    const sort =  isDesc? 'desc' : 'asc';
+    return this.http.get<Pagination<OrderResponse>>(`/api/orders?page=${page}`, {params: new HttpParams().set('sort', sort)});
   }
 
   public show(order_id: number): Observable<OrderResponse> {
